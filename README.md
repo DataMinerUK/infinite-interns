@@ -1,7 +1,7 @@
 Skel
 ====
 
-This is a skeleton layout for data driven journalism projects.
+A skeleton layout for data driven journalism projects.
 
 Getting Started
 ---------------
