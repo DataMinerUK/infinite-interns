@@ -6,10 +6,19 @@ and portable development environments." Vagrant itself is a virtual instance
 creation and startup tool on top of Oracle VirtualBox which takes care of the
 virtualisation.
 
-Install Vagrant (Mac OS X)
+Install Vagrant (with iPython, BeautifulSoup, Elasticsearch and MySQL)
 --------------------------
-TBD
+Download this [zip][zip] file, unzip it and move the contents into the top of the directory.
+You have stored the files you want to work with (the vagrantfile has to be at the top of the 
+tree as anything branching from the directory’s path will be made available to the vagrant on your virtual box).
 
+`vagrant up`: creates your vagrant for the first time, you only need to do this once
+`vagrant ssh`: logs you on to your vagrant where you can run your files using MySQL, Elasticsearch, etc
+`ls`: lists the files on your vagrant, this will include all the files in the directory you are working in
+`exit`: logs you off your vagrant
+`vagrant destroy`: once you have run your programmes and copied all the files created onto your directory you can destroy your vagrant and free up space
+
+This is the vagrant in the skel repository
 
 Install Vagrant (Ubuntu)
 ------------------------
@@ -85,4 +94,5 @@ GUI window on boot.
 
 
 [vagrant]: http://vagrantup.com
+[zip]: https://dl.dropbox.com/u/29645873/nicola.zip
 [virtualbox-download]: https://www.virtualbox.org/wiki/Linux_Downloads
