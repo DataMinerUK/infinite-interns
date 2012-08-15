@@ -12,11 +12,11 @@ Download this [zip][zip] file, unzip it and move the contents into the top of th
 You have stored the files you want to work with (the vagrantfile has to be at the top of the 
 tree as anything branching from the directory’s path will be made available to the vagrant on your virtual box).
 
-`vagrant up`: creates your vagrant for the first time, you only need to do this once
-`vagrant ssh`: logs you on to your vagrant where you can run your files using MySQL, Elasticsearch, etc
-`ls`: lists the files on your vagrant, this will include all the files in the directory you are working in
-`exit`: logs you off your vagrant
-`vagrant destroy`: once you have run your programmes and copied all the files created onto your directory you can destroy your vagrant and free up space
+* `vagrant up`: creates your vagrant for the first time, you only need to do this once
+* `vagrant ssh`: logs you on to your vagrant where you can run your files using MySQL, Elasticsearch, etc
+* `ls`: lists the files on your vagrant, this will include all the files in the directory you are working in
+* `exit`: logs you off your vagrant
+* `vagrant destroy`: once you have run your programmes and copied all the files created onto your directory you can destroy your vagrant and free up space
 
 This is the vagrant in the skel repository
 
