@@ -16,12 +16,14 @@ Project Layout
  Readme in the absence of docs, this should contain description of the project, detailing of the sources and outputs, together with any philosophical and impertinent facts
  It must detail explicitly what is to be done
 
-* `run.sh`: your file to run on the command line, that file must transform /data and produce data in /out
 * `/bin`: python scripts, bash scripts e.g. scrapers and parsers
 * `/data`: the original data files e.g. raw html, csv downloads, list of urls
 * `/lib`: third party libraries and software
 * `/out`: somewhere to leave the output and intermediate data acted upon later, actions will leave output documents there
 `/out` may be sub directoried
+* `run.sh`: your file to run on the command line, that file must transform /data and produce data in /out
+* `.gitignore`: this is a list of files which git will ignore when
+  you are doing adds and commits
 
 * `Vagrantfile`: builds your virtual environment with all the software you need to run the project
 * `/vagrant`: if one is required
