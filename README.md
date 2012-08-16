@@ -7,7 +7,7 @@ Getting Started
 ---------------
 * Clone to your own machine
 * Your skel folder is still connected to the original GitHub repository so you want to make a copy that does not have git in it so you can work on the project and add it to GitHub later
-* To do this `cd` into skel and type `git archive --format zip --output '/full/path/to/dataproject'.zip master`
+* To do this `cd` into skel and type `git archive --format zip --output '/full/path/to/YourDataProject'.zip master`
 * Now you can unzip it and build you data driven journalism project
 
 Project Layout
