@@ -19,6 +19,7 @@ Project Layout
 * `/bin`: python scripts, bash scripts e.g. scrapers and parsers
 * `/data`: the original data files e.g. raw html, csv downloads, list of urls
 * `/lib`: third party libraries and software
+* `/test`: tests for the processing commands in `bin`.
 * `/out`: somewhere to leave the output and intermediate data acted upon later, actions will leave output documents there
 `/out` may be sub directoried
 * `run.sh`: your file to run on the command line, that file must transform /data and produce data in /out
