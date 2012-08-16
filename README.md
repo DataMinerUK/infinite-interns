@@ -6,9 +6,9 @@ A skeleton layout for data driven journalism projects.
 Getting Started
 ---------------
 * Clone to your own machine
-* Delete the .git directory from the clone
-* Navigate into your skel in the command line and type `git init`
-* Your project is now ready to be populated
+* Your skel folder is still connected to the original GitHub repository so you want to make a copy that does not have git in it so you can work on the project and add it to GitHub later
+* To do this `cd` into skel and type `git archive --format zip --output '/full/path/to/dataproject'.zip master`
+* Now you can unzip it and build you data driven journalism project
 
 Project Layout
 --------------
