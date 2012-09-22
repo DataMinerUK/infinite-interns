@@ -6,47 +6,41 @@ class refine {
     refine: ensure => present
   }
 
-  User {
-    shell => '/bin/bash',
-    managehome => true
-  }
-
   user {
     refine:
       ensure => present,
       gid => refine,
-      groups => admin
-  }
-
-  File {
-    owner => root,
-    group => root
+      groups => admin,
+      shell => '/bin/bash',
+      managehome => true
   }
 
   file {
     '/etc/init.d/refine':
       source => 'puppet:///files/etc/init.d/refine',
+      owner => root,
+      group => root,
       mode => 0744;
 
     '/etc/init/refine.conf':
       source => 'puppet:///files/etc/init/refine.conf',
+      owner => root,
+      group => root
       mode => 0644;
-  }
-
-  Exec {
-    cwd => '/var/cache/downloads',
-    timeout => 0
   }
 
   exec {
     download-refine:
       command => '/usr/bin/wget http://google-refine.googlecode.com/files/google-refine-2.5-r2407.tar.gz',
-      creates => '/var/cache/downloads/google-refine-2.5-r2407.tar.gz';
+      cwd => '/var/cache/downloads',
+      creates => '/var/cache/downloads/google-refine-2.5-r2407.tar.gz',
+      timeout => 0;
 
     install-refine:
       command => '/bin/tar xzf /var/cache/downloads/google-refine-2.5-r2407.tar.gz',
       cwd => '/opt',
-      creates => '/opt/google-refine-2.5';
+      creates => '/opt/google-refine-2.5',
+      timeout => 0;
   }
 
   service {

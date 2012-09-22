@@ -1,22 +1,30 @@
 class apt {
 
-  File {
-    owner => root,
-    group => root,
-    mode => 0644
-  }
-
   file {
-    '/var/cache/downloads': ensure => directory;
+    '/var/cache/downloads':
+      ensure => directory,
+      owner => root,
+      group => root,
+      mode => 0644;
 
-    '/etc/apt/sources.list.d': ensure => directory;
+    '/etc/apt/sources.list.d':
+      ensure => directory,
+      owner => root,
+      group => root,
+      mode => 0644;
       
     # R repository
     '/etc/apt/sources.list.d/cran.list':
-      source => 'puppet:///files/etc/apt/sources.list.d/cran.list';
+      source => 'puppet:///files/etc/apt/sources.list.d/cran.list',
+      owner => root,
+      group => root,
+      mode => 0644;
 
     '/etc/apt/trusted.gpg.d/cran.gpg':
-      source => 'puppet:///files/etc/apt/trusted.gpg.d/cran.gpg';
+      source => 'puppet:///files/etc/apt/trusted.gpg.d/cran.gpg',
+      owner => root,
+      group => root,
+      mode => 0644;
   }
 
   exec {
@@ -27,10 +35,9 @@ class apt {
         '/etc/apt/sources.list.d/cran.list'
       ],
       refreshonly => true;
-  }
-  
-  exec { 'apt-get upgrade':
-    command => '/usr/bin/apt-get upgrade -y'
+
+    'apt-get upgrade':
+      command => '/usr/bin/apt-get upgrade -y';
   }
   
   Exec['apt-get update'] -> Exec['apt-get upgrade']
