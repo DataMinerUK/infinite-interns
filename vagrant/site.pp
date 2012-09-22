@@ -6,11 +6,7 @@ node default {
   
   include mysql
   include python
-  include scientific 
-
-  include java
+  include scientific
   include refine
-
-  Class[java] -> Class[refine]
 
 }

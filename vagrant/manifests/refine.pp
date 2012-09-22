@@ -1,5 +1,7 @@
 class refine {
 
+  require java
+
   group {
     refine: ensure => present
   }
