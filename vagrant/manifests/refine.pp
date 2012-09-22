@@ -25,7 +25,7 @@ class refine {
     '/etc/init/refine.conf':
       source => 'puppet:///files/etc/init/refine.conf',
       owner => root,
-      group => root
+      group => root,
       mode => 0644;
   }
 
