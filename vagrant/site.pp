@@ -6,6 +6,7 @@ node default {
   
   include mysql
   include python
-  include scientific 
-  
+  include scientific
+  include refine
+
 }
