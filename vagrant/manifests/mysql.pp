@@ -1,29 +1,30 @@
+# Add MySQL installation
 class mysql {
 
   package {
     [
-       mysql-server,
-       mysql-client
+      mysql-server,
+      mysql-client
     ]: ensure => installed;
   }
 
   file {
     '/etc/mysql/my.cnf':
       source => 'puppet:///files/etc/mysql/my.cnf',
-      owner => root,
-      group => root,
-      mode => 644;
+      owner  => root,
+      group  => root,
+      mode   => '0644';
   }
 
   service {
-    mysql:
-      ensure => running,
+    'mysql':
+      ensure    => running,
       subscribe => File['/etc/mysql/my.cnf'];
   }
 
   exec {
-    mysql-relax-connection-permissions:
-      command => "/usr/bin/mysql -u root -e \"grant all privileges on *.* to 'root'@'%';\"";
+    'mysql-relax-connection-permissions':
+      command => '/usr/bin/mysql -u root -e "grant all privileges on *.* to \'root\'@\'%\';"';
   }
 
   Package[mysql-server] ->
