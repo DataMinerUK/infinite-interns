@@ -1,7 +1,7 @@
 # Add node.js installation
 class nodejs {
 
-  require apt
+  require setup
 
   package { 
     'nodejs': ensure => latest;

@@ -1,7 +1,7 @@
 # Add a MongoDB installation
 class mongodb {
 
-  require apt
+  require setup
 
   package { 'mongodb-10gen': ensure => latest; }
   service { 'mongodb': ensure => running; }

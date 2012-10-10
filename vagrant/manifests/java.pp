@@ -1,7 +1,7 @@
 # Add OpenJDK installation
 class java {
 
-  require apt
+  require setup
 
   package {
     'openjdk-6-jdk': ensure => latest

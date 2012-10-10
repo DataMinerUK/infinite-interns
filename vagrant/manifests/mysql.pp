@@ -1,7 +1,7 @@
 # Add MySQL installation
 class mysql {
 
-  require apt
+  require setup
 
   package {
     [

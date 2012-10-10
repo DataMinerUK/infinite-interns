@@ -1,7 +1,7 @@
 # Add installation of Google Tesseract 
 class ocr {
 
-  require apt
+  require setup
 
   package {
     'tesseract-ocr': ensure => latest;

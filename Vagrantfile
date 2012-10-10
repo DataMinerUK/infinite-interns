@@ -7,7 +7,12 @@ Vagrant::Config.run do |config|
   config.ssh.forward_x11 = true
   config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
 
-  config.vm.provision :puppet, :options => ["--fileserverconfig=/vagrant/vagrant/fileserver.conf", "--debug"] do |puppet|
+  config.vm.provision :puppet, 
+    :options => [
+      "--fileserverconfig=/vagrant/vagrant/fileserver.conf",
+      "--modulepath=/vagrant/vagrant/modules", 
+      "--debug"
+    ] do |puppet|
     puppet.manifests_path = "vagrant"
     puppet.manifest_file = "site.pp"
   end

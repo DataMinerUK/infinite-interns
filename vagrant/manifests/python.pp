@@ -1,7 +1,7 @@
 # Add python installation
 class python {
 
-  require apt
+  require setup
 
   package {
     [

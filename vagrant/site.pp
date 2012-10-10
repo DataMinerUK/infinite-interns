@@ -2,8 +2,7 @@ import 'manifests/*.pp'
 
 node default {
 
-  require apt
-
+  include devel
   include mysql
   include python
   include scientific
