@@ -1,6 +1,7 @@
 # Add installation of Google Refine
 class refine {
 
+  require apt
   require java
 
   group {

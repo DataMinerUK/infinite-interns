@@ -1,6 +1,8 @@
 # Add installation of useful scientific tools
 class scientific {
 
+  require apt
+
   package {
     [
       gnuplot,
