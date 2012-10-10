@@ -4,7 +4,7 @@ class devel {
   require setup
 
   package {
-    'git': ensure => latest;
+    ['build-essential', 'git']: ensure => latest;
   }
 
 }
