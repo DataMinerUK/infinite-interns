@@ -8,6 +8,12 @@ class apt {
       group  => root,
       mode   => '0644';
 
+    '/etc/apt/sources.list':
+      source => 'puppet:///files/etc/apt/sources.list',
+      owner  => root,
+      group  => root,
+      mode   => '0644';
+
     '/etc/apt/sources.list.d':
       ensure => directory,
       owner  => root,
@@ -45,6 +51,7 @@ class apt {
     'apt-get update':
       command     => '/usr/bin/apt-get update -y',
       subscribe   => File[
+        '/etc/apt/sources.list',
         '/etc/apt/trusted.gpg.d/cran.gpg',
         '/etc/apt/sources.list.d/cran.list',
         '/etc/apt/trusted.gpg.d/10gen.gpg',
