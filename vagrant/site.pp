@@ -10,5 +10,6 @@ node default {
   include refine
   include mongodb
   include nodejs
+  include ocr 
 
 }
