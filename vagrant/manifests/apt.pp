@@ -60,7 +60,7 @@ class apt {
       refreshonly => true;
 
     'apt-get upgrade':
-      command => '/usr/bin/apt-get upgrade -y';
+      command => '/usr/bin/apt-get upgrade -y --force-yes';
   }
 
   Exec['apt-get update'] -> Exec['apt-get upgrade']
