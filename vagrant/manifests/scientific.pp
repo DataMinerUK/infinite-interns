@@ -1,6 +1,8 @@
 # Add installation of useful scientific tools
 class scientific {
 
+  require setup
+
   package {
     [
       'gnuplot',

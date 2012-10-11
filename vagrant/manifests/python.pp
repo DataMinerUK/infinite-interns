@@ -1,6 +1,8 @@
 # Add python installation
 class python {
 
+  require setup
+
   package {
     [
       'ipython',

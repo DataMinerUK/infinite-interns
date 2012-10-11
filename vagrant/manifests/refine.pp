@@ -1,6 +1,7 @@
 # Add installation of Google Refine
 class refine {
 
+  require setup
   require devel
 
   group {
