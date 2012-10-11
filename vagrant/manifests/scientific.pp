@@ -1,14 +1,14 @@
 # Add installation of useful scientific tools
 class scientific {
 
-  require setup
-
   package {
     [
-      gnuplot,
-      octave,
-      r-base,
-      libjpeg62
+      'gnuplot',
+      'octave',
+      'r-base',
+      'libjpeg62',
+      'python-gnuplot',
+      'python-numpy'
     ]: ensure => latest;
   }
 
