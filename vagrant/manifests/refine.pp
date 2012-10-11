@@ -1,8 +1,7 @@
 # Add installation of Google Refine
 class refine {
 
-  require setup
-  require java
+  require devel
 
   group {
     'refine': ensure => present

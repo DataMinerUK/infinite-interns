@@ -2,10 +2,14 @@ import 'manifests/*.pp'
 
 node default {
 
+  require setup
+
+  include ntp
   include devel
-  include mysql
+  include db
   include python
   include scientific
+
   include refine
   include mongodb
   include nodejs
