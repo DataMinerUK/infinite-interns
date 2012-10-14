@@ -23,16 +23,6 @@ class setup {
       include_src => false;
   }
 
-  apt::source {
-    'nodejs':
-      location    => 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu',
-      release     => 'precise',
-      repos       => 'main',
-      key         => 'C7917B12',
-      key_server  => 'keyserver.ubuntu.com',
-      include_src => false;
-  }
-
   file {
     '/var/cache/downloads':
       ensure => directory,
