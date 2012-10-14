@@ -2,8 +2,6 @@ import 'manifests/*.pp'
 
 node default {
 
-  require setup
-
   include ntp
   include devel
   include db
