@@ -2,6 +2,17 @@
 class scientific {
 
   require setup
+  include apt
+
+  apt::source {
+    'cran':
+      location    => 'http://cran.ma.imperial.ac.uk/bin/linux/ubuntu',
+      release     => 'precise/',
+      repos       => '',
+      key         => 'E084DAB9',
+      key_server  => 'keyserver.ubuntu.com',
+      include_src => false;
+  }
 
   package {
     [
@@ -30,6 +41,6 @@ class scientific {
       timeout => 0;
   }
 
+  Apt::Source['cran'] -> Package['r-base']
   Package[libjpeg62] -> Exec[download-rstudio] -> Exec[install-rstudio]
-
 }
