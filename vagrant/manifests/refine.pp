@@ -1,7 +1,6 @@
 # Add installation of Google Refine
 class refine {
 
-  require setup
   require devel
 
   group {
@@ -34,12 +33,12 @@ class refine {
   exec {
     'download-refine':
       command => '/usr/bin/wget http://google-refine.googlecode.com/files/google-refine-2.5-r2407.tar.gz',
-      cwd     => '/var/cache/downloads',
-      creates => '/var/cache/downloads/google-refine-2.5-r2407.tar.gz',
+      cwd     => '/root',
+      creates => '/root/google-refine-2.5-r2407.tar.gz',
       timeout => 0;
 
     'install-refine':
-      command => '/bin/tar xzf /var/cache/downloads/google-refine-2.5-r2407.tar.gz',
+      command => '/bin/tar xzf /root/google-refine-2.5-r2407.tar.gz',
       cwd     => '/opt',
       creates => '/opt/google-refine-2.5',
       timeout => 0;
