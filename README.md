@@ -10,6 +10,13 @@ Getting Started
 * To do this `cd` into skel and type `git archive --format zip --output '/full/path/to/YourDataProject'.zip master`
 * Now you can unzip it and build you data driven journalism project
 
+Preinstalls
+-----------
+* Install [VirtualBox][virtualbox]
+* Install [Vagrant][vagrant]. See [README.vagrant.md][vagrantREADME] for instructions.
+* Install [Sequel Pro][sequel]. This is for Mac and is a great GUI for using MySQL databases. 
+* Install [XQuartz][XQuartz]. This is for Mac and allows you to run RStudio from your vagrant.
+
 Project Layout
 --------------
 * `README.md`: at the top level of your project folder
@@ -29,3 +36,9 @@ Project Layout
 * `Vagrantfile`: builds your virtual environment with all the software you need to run the project
 * `/vagrant`: if one is required
 * `README.vagrant.md`:  instructions for using vagrant
+
+[virtualbox]: https://www.virtualbox.org/wiki/Downloads
+[vagrant]: http://vagrantup.com
+[vagrantREADME]: https://github.com/DataMinerUK/skel/blob/master/README.vagrant.md
+[sequel]: http://www.sequelpro.com/
+[XQuartz]: http://xquartz.macosforge.org/
