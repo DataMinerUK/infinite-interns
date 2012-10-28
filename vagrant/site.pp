@@ -1,6 +1,6 @@
 import 'manifests/*.pp'
 
 node default {
-  include common
+  require common
   include "${::hostname}"
 }
