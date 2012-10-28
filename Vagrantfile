@@ -22,7 +22,7 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :r do |r|
-    r.vm.host_name = "r"
+    r.vm.host_name = "rstudio"
   end
 
   config.vm.define :octave do |octave|

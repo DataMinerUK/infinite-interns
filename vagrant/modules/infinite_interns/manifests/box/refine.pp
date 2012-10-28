@@ -1,7 +1,7 @@
 # Refine Infinite Intern
 class infinite_interns::box::refine {
 
-  require devel
+  require common::devel
 
   group {
     'refine': ensure => present
@@ -30,15 +30,18 @@ class infinite_interns::box::refine {
       mode   => '0644';
   }
 
+  $url = 'http://google-refine.googlecode.com/files'
+  $filename = 'google-refine-2.5-r2407.tar.gz'
+
   exec {
     'download-refine':
-      command => '/usr/bin/wget http://google-refine.googlecode.com/files/google-refine-2.5-r2407.tar.gz',
+      command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
-      creates => '/root/google-refine-2.5-r2407.tar.gz',
+      creates => "/root/${filename}",
       timeout => 0;
 
     'install-refine':
-      command => '/bin/tar xzf /root/google-refine-2.5-r2407.tar.gz',
+      command => "/bin/tar xzf /root/${filename}",
       cwd     => '/opt',
       creates => '/opt/google-refine-2.5',
       timeout => 0;

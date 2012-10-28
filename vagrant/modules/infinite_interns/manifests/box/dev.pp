@@ -3,6 +3,7 @@ class infinite_interns::box::dev {
 
   package {
     [
+      git,
       ruby,
       irb,
       rubygems

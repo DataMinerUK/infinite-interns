@@ -15,6 +15,6 @@ class infinite_interns::box::mongodb {
 
   service { 'mongodb': ensure => running; }
 
-  Apt::Source['nodejs'] -> Package['mongodb-10gen'] -> Service[mongodb]
+  Apt::Source['10gen-upstart'] -> Package['mongodb-10gen'] -> Service[mongodb]
 
 }

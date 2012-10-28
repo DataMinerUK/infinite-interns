@@ -1,5 +1,6 @@
 # R Infinite Intern
-class infinite_interns::box::r {
+# Called rstudio because one letter hostnames are a problem in Vagrant
+class infinite_interns::box::rstudio {
 
   apt::source {
     'cran':

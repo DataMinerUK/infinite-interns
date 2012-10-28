@@ -11,7 +11,7 @@ class infinite_interns::box::nodejs {
       include_src => false;
   }
 
-  package { 
+  package {
     'nodejs': ensure => latest;
     'npm': ensure => latest;
   }
