@@ -28,12 +28,12 @@ class infinite_interns::box::elasticsearch {
       notify  => Service[elasticsearch];
 
     'install-elasticsearch-paramedic'
-      command => '/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic':
+      command => '/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic',
       creates => '/usr/share/elasticsearch/plugins/paramedic',
       notify => Service[elasticsearch];
 
     'install-elasticsearch-bigdesk':
-      command =>'/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk':
+      command =>'/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk',
       creates => '/usr/share/elasticsearch/plugins/bigdesk',
       notify => Service[elasticsearch];
   }
