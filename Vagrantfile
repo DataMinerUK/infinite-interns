@@ -19,10 +19,12 @@ Vagrant::Config.run do |config|
 
   config.vm.define :python do |python|
     python.vm.host_name = "python"
+    python.vm.forward_port 8888, 18888
   end
 
   config.vm.define :pandas do |pandas|
     pandas.vm.host_name = "pandas"
+    pandas.vm.forward_port 8888, 28888
   end
 
   config.vm.define :r do |r|
