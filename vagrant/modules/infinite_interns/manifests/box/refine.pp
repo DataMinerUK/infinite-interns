@@ -1,5 +1,5 @@
-# Add installation of Google Refine
-class refine {
+# Refine Infinite Intern
+class infinite_interns::box::refine {
 
   require devel
 
@@ -24,7 +24,7 @@ class refine {
       mode   => '0744';
 
     '/etc/init/refine.conf':
-      source => 'puppet:///files/etc/init/refine.conf',
+      source => 'puppet:///infinite_interns/etc/init/refine.conf',
       owner  => root,
       group  => root,
       mode   => '0644';

@@ -1,7 +1,5 @@
-# Add Node.js installation
-class nodejs {
-
-  include apt
+# Node.js Infinite Intern
+class infinite_interns::box::nodejs {
 
   apt::source {
     'nodejs':

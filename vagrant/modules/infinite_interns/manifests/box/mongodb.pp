@@ -1,7 +1,5 @@
-# Add MongoDB installation
-class mongodb {
-
-  include apt
+# MongoDB Infinite Intern
+class infinite_interns::box::mongodb {
 
   apt::source {
     '10gen-upstart':

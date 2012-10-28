@@ -5,13 +5,9 @@ Vagrant::Config.run do |config|
 
   # config.vm.boot_mode = :gui
   config.ssh.forward_x11 = true
-  config.vm.share_folder "puppet-files", "/etc/puppet/files", "vagrant/files"
 
   config.vm.provision :puppet, 
-    :options => [
-      "--fileserverconfig=/vagrant/vagrant/fileserver.conf",
-      "--modulepath=/vagrant/vagrant/modules"
-    ] do |puppet|
+    :options => "--modulepath=/vagrant/vagrant/modules" do |puppet|
     puppet.manifests_path = "vagrant"
     puppet.manifest_file = "site.pp"
   end
@@ -29,8 +25,12 @@ Vagrant::Config.run do |config|
     ruby.vm.host_name = "ruby"
   end
 
-  config.vm.define :scientific do |scientific|
-    scientific.vm.host_name = "scientific"
+  config.vm.define :r do |r|
+    r.vm.host_name = "r"
+  end
+
+  config.vm.define :octave do |octave|
+    octave.vm.host_name = "octave"
   end
 
   config.vm.define :refine do |refine|

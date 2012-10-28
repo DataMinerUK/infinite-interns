@@ -1,7 +1,5 @@
-# Add installation of useful scientific tools
-class scientific {
-
-  include apt
+# R Infinite Intern
+class infinite_interns::box::r {
 
   apt::source {
     'cran':
@@ -16,11 +14,8 @@ class scientific {
   package {
     [
       'gnuplot',
-      'octave',
       'r-base',
-      'libjpeg62',
-      'python-gnuplot',
-      'python-numpy'
+      'libjpeg62'
     ]: ensure => latest;
   }
 

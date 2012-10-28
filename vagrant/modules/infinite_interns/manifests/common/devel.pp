@@ -1,5 +1,5 @@
-# Add installation of developer tools
-class devel {
+# Developer tools for Infinite Intern boxes
+class infinite_interns::common::devel {
 
   package {
     [
