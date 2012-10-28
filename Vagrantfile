@@ -21,6 +21,10 @@ Vagrant::Config.run do |config|
     python.vm.host_name = "python"
   end
 
+  config.vm.define :pandas do |pandas|
+    pandas.vm.host_name = "pandas"
+  end
+
   config.vm.define :r do |r|
     r.vm.host_name = "rstudio"
   end

@@ -6,8 +6,7 @@ class infinite_interns::box::python {
       'ipython',
       'ipython-notebook',
       'python-setuptools',
-      'python-bs4',
-      'python-numpy'
+      'python-bs4'
     ]: ensure => installed;
   }
 

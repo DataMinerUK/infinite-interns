@@ -18,7 +18,7 @@ class infinite_interns::box::refine {
 
   file {
     '/etc/init.d/refine':
-      source => 'puppet:///files/etc/init.d/refine',
+      source => 'puppet:///infinite_interns/etc/init.d/refine',
       owner  => root,
       group  => root,
       mode   => '0744';
