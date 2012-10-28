@@ -1,5 +1,5 @@
-# Ruby installation for building Infinite Intern boxes
-class infinite_interns::box::ruby {
+# Dev installation for building Infinite Intern boxes
+class infinite_interns::box::dev {
 
   package {
     [
