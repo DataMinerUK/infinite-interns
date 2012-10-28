@@ -17,10 +17,37 @@ Vagrant::Config.run do |config|
     puppet.manifest_file = "site.pp"
   end
 
-  config.vm.forward_port 3306, 3306
-  config.vm.forward_port 3333, 3333
-  config.vm.forward_port 8888, 8888 
-  config.vm.forward_port 27017, 27017
-  config.vm.forward_port 28017, 28017
+  config.vm.define :mysql do |mysql|
+    mysql.vm.host_name = "mysql"
+    mysql.vm.forward_port 3306, 3306
+  end
+
+  config.vm.define :python do |python|
+    python.vm.host_name = "python"
+  end
+
+  config.vm.define :scientific do |scientific|
+    scientific.vm.host_name = "scientific"
+  end
+
+  config.vm.define :refine do |refine|
+    refine.vm.host_name = "refine"
+    refine.vm.forward_port 3333, 3333
+  end
+
+  config.vm.define :mongodb do |mongodb|
+    mongodb.vm.host_name = "mongodb"
+	mongodb.vm.forward_port 27017, 27017
+	mongodb.vm.forward_port 28017, 28017
+  end
+
+  config.vm.define :nodejs do |nodejs|
+    nodejs.vm.host_name = "nodejs"
+    nodejs.vm.forward_port 8888, 8888 
+  end
+
+  config.vm.define :ocr do |ocr|
+    ocr.vm.host_name = "ocr"
+  end
 
 end

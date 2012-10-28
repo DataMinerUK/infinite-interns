@@ -1,16 +1,36 @@
 import 'manifests/*.pp'
 
-node default {
-
-  include ntp
-  include devel
+node mysql {
+  include common
   include db
+}
+
+node python {
+  include common
   include python
+}
+
+node scientific {
+  include common
   include scientific
+}
 
+node refine {
+  include common
   include refine
-  include mongodb
-  include nodejs
-  include ocr 
+}
 
+node mongodb {
+  include common
+  include mongodb
+}
+
+node nodejs {
+  include common
+  include nodejs
+}
+
+node ocr {
+  include common
+  include ocr 
 }
