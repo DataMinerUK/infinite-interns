@@ -14,6 +14,7 @@ do
 	echo
 
 	vagrant up $box
+	rm -f boxes/$box.box
 	vagrant package $box --output boxes/$box.box
 	vagrant destroy -f $box
 done
