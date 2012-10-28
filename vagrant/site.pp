@@ -2,7 +2,7 @@ import 'manifests/*.pp'
 
 node mysql {
   include common
-  include db
+  include mysql
 }
 
 node python {
