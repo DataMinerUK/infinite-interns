@@ -25,6 +25,10 @@ Vagrant::Config.run do |config|
     python.vm.host_name = "python"
   end
 
+  config.vm.define :ruby do |ruby|
+    ruby.vm.host_name = "ruby"
+  end
+
   config.vm.define :scientific do |scientific|
     scientific.vm.host_name = "scientific"
   end
