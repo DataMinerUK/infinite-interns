@@ -38,6 +38,11 @@ Vagrant::Config.run do |config|
     refine.vm.forward_port 3333, 3333
   end
 
+  config.vm.define :elasticsearch do |elasticsearch|
+    elasticsearch.vm.host_name = "elasticsearch"
+    elasticsearch.vm.forward_port 9200, 9200
+  end
+
   config.vm.define :mongodb do |mongodb|
     mongodb.vm.host_name = "mongodb"
 	mongodb.vm.forward_port 27017, 27017
