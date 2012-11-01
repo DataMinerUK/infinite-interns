@@ -12,6 +12,11 @@ Vagrant::Config.run do |config|
     puppet.manifest_file = "site.pp"
   end
 
+  config.vm.define :nginx do |nginx|
+    nginx.vm.host_name = "nginx"
+    nginx.vm.forward_port 80, 8000
+  end
+
   config.vm.define :mysql do |mysql|
     mysql.vm.host_name = "mysql"
     mysql.vm.forward_port 3306, 3306
@@ -19,12 +24,12 @@ Vagrant::Config.run do |config|
 
   config.vm.define :python do |python|
     python.vm.host_name = "python"
-    python.vm.forward_port 8888, 18888
+    python.vm.forward_port 8888, 8888
   end
 
   config.vm.define :pandas do |pandas|
     pandas.vm.host_name = "pandas"
-    pandas.vm.forward_port 8888, 28888
+    pandas.vm.forward_port 8888, 8888
   end
 
   config.vm.define :r do |r|
