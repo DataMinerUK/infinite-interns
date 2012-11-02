@@ -4,6 +4,8 @@ server {
 	root /vagrant;
 	index index.html index.htm;
 
+	sendfile off;
+
 	server_name localhost;
 
 	location / {
