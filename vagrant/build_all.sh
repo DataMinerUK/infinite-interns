@@ -8,13 +8,15 @@ vagrant destroy -f
 for box in $BOXES
 do
 	echo
-    echo "###############################################"
+	echo "###############################################"
 	echo "Building $box"
 	echo "###############################################"
 	echo
 
+	mkdir -p boxes/$box
+	rm -f boxes/$box/$box.box
+
 	vagrant up $box
-	rm -f boxes/$box.box
-	vagrant package $box --output boxes/$box.box
+	vagrant package $box --output boxes/$box/$box.box
 	vagrant destroy -f $box
 done
