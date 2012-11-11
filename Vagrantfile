@@ -52,13 +52,17 @@ Vagrant::Config.run do |config|
 
   config.vm.define :mongodb do |mongodb|
     mongodb.vm.host_name = "mongodb"
-	mongodb.vm.forward_port 27017, 27017
-	mongodb.vm.forward_port 28017, 28017
+    mongodb.vm.forward_port 27017, 27017
+    mongodb.vm.forward_port 28017, 28017
   end
 
   config.vm.define :nodejs do |nodejs|
     nodejs.vm.host_name = "nodejs"
     nodejs.vm.forward_port 8888, 8888 
+  end
+
+  config.vm.define :phantomjs do |phantomjs|
+    phantomjs.vm.host_name = "phantomjs"
   end
 
   config.vm.define :ocr do |ocr|
