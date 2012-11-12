@@ -1,0 +1,9 @@
+Vagrant::Config.run do |config|
+  config.vm.box = "mysql"
+  config.vm.box_url = "http://dl.dropbox.com/u/29645873/vagrants/mysql.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+
+  config.vm.forward_port 3306, 3306
+end
