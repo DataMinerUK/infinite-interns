@@ -2,7 +2,6 @@
 class infinite_interns::box::mysql {
 
   class { '::mysql': }
-  class { '::mysql::python': }
   class {
     '::mysql::server':
       config_hash => {
@@ -11,6 +10,10 @@ class infinite_interns::box::mysql {
     }
   }
 
-  database_grant { 'root@%/*.*': privileges => ['all'] }
+  exec {
+    'mysql-relax-connection-permissions':
+      command => '/usr/bin/mysql -u root --password=password -e "grant all privileges on *.* to \'root\'@\'%\' IDENTIFIED BY \'password\';"';
+  }
 
+  Class['::mysql::server'] -> Exec[mysql-relax-connection-permissions]
 }
