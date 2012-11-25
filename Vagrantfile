@@ -7,8 +7,8 @@ Vagrant::Config.run do |config|
   config.ssh.forward_x11 = true
 
   config.vm.provision :puppet, 
-    :options => "--modulepath=/vagrant/vagrant/modules" do |puppet|
-    puppet.manifests_path = "vagrant"
+    :options => "--modulepath=/vagrant/modules" do |puppet|
+    puppet.manifests_path = "."
     puppet.manifest_file = "site.pp"
   end
 
