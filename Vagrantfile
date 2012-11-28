@@ -56,6 +56,14 @@ Vagrant::Config.run do |config|
     mongodb.vm.forward_port 28017, 28017
   end
 
+  config.vm.define :pig do |pig|
+    pig.vm.host_name = "pig"
+  end
+
+  config.vm.define :vowpalwabbit do |vowpalwabbit|
+    vowpalwabbit.vm.host_name = "vowpalwabbit"
+  end
+
   config.vm.define :nodejs do |nodejs|
     nodejs.vm.host_name = "nodejs"
     nodejs.vm.forward_port 8888, 8888 
