@@ -1,0 +1,7 @@
+Vagrant::Config.run do |config|
+  config.vm.box = "r"
+  config.vm.box_url = "http://dl.dropbox.com/u/29645873/vagrants/r.box"
+
+  # config.vm.boot_mode = :gui
+  config.ssh.forward_x11 = true
+end
