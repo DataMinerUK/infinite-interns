@@ -9,8 +9,8 @@ class infinite_interns::box::elasticsearch {
   exec {
     "download-elasticsearch-deb":
       command => "/usr/bin/wget ${url}/${filename}",
-      cwd     => '/var/cache/apt/archives',
-      creates => "/var/cache/apt/archives/${filename}",
+      cwd     => '/root',
+      creates => "/root/${filename}",
       timeout => 0;
   }
 
@@ -18,7 +18,7 @@ class infinite_interns::box::elasticsearch {
     elasticsearch:
       ensure   => installed,
       provider => dpkg,
-      source   => "/var/cache/apt/archives/${filename}";
+      source   => "/root/${filename}";
   }
 
   exec {
