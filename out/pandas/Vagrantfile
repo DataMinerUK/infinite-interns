@@ -1,5 +1,5 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "python"
+  config.vm.box = "pandas"
   config.vm.box_url = "http://dl.dropbox.com/u/29645873/vagrants/pandas.box"
 
   # config.vm.boot_mode = :gui
