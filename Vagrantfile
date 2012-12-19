@@ -77,6 +77,19 @@ Vagrant::Config.run do |config|
     ocr.vm.host_name = "ocr"
   end
 
+  config.vm.define :hadoop do |hadoop|
+    hadoop.vm.host_name = "hadoop"
+    hadoop.vm.forward_port 50030, 50030
+    hadoop.vm.forward_port 50060, 50060
+    hadoop.vm.forward_port 50070, 50070
+    hadoop.vm.forward_port 50075, 50075
+  end
+
+  config.vm.define :neo4j do |neo4j|
+    neo4j.vm.host_name = "neo4j"
+    neo4j.vm.forward_port 7474, 7474
+  end
+
   config.vm.define :dev do |dev|
     dev.vm.host_name = "dev"
   end
