@@ -7,7 +7,7 @@ class infinite_interns::box::elasticsearch {
   $filename = 'elasticsearch-0.19.11.deb'
 
   exec {
-    "download-elasticsearch-deb":
+    'download-elasticsearch-deb':
       command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
       creates => "/root/${filename}",
@@ -15,7 +15,7 @@ class infinite_interns::box::elasticsearch {
   }
 
   package {
-    elasticsearch:
+    'elasticsearch':
       ensure   => installed,
       provider => dpkg,
       source   => "/root/${filename}";
@@ -39,14 +39,14 @@ class infinite_interns::box::elasticsearch {
   }
 
   service {
-    elasticsearch:
+    'elasticsearch':
       ensure => running,
       enable => true;
   }
 
   Exec[download-elasticsearch-deb] ->
     Package[elasticsearch] ->
-    Exec[install-elasticsearch-head] ->	
+    Exec[install-elasticsearch-head] ->
     Exec[install-elasticsearch-paramedic] ->
     Exec[install-elasticsearch-bigdesk] ->
     Service[elasticsearch]

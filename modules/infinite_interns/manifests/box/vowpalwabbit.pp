@@ -2,7 +2,7 @@
 class infinite_interns::box::vowpalwabbit {
 
   package {
-    vowpal-wabbit: ensure => latest;
+    'vowpal-wabbit': ensure => latest;
   }
 
 }

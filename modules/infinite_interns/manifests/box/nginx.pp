@@ -16,11 +16,11 @@ class infinite_interns::box::nginx {
 
   service {
     'nginx':
-      enable => true,
-      ensure => running;
+      ensure => running,
+      enable => true;
   }
 
-  Package[nginx] -> 
+  Package[nginx] ->
     File['/etc/nginx/sites-available/default'] ->
     Service[nginx]
 
