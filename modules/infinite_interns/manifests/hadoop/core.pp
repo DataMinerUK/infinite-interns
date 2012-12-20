@@ -1,13 +1,13 @@
-# Apache Pig Infinite Intern
-class infinite_interns::box::pig {
+# Hadoop Package Installation
+class infinite_interns::hadoop::core {
 
   require common::devel
 
-  $url = 'http://mirror.ox.ac.uk/sites/rsync.apache.org/pig/pig-0.10.0'
-  $filename = 'pig_0.10.0-1_i386.deb'
+  $url ='http://mirror.ox.ac.uk/sites/rsync.apache.org/hadoop/common/hadoop-1.1.1'
+  $filename ='hadoop_1.1.1-1_x86_64.deb'
 
   exec {
-    'download-pig-deb':
+    'download-hadoop-deb':
       command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
       creates => "/root/${filename}",
@@ -15,12 +15,11 @@ class infinite_interns::box::pig {
   }
 
   package {
-    'pig':
+    'hadoop':
       ensure   => installed,
       provider => dpkg,
       source   => "/root/${filename}";
   }
 
-  Exec['download-pig-deb'] -> Package['pig']
-
+  Exec['download-hadoop-deb'] -> Package['hadoop']
 }
