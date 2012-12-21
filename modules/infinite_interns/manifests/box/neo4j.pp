@@ -3,9 +3,9 @@ class infinite_interns::box::neo4j {
 
   require common::devel
 
-  $url = 'http://dist.neo4j.org/'
-  $filename = 'neo4j-community-1.7.2-unix.tar.gz'
-  $filename_extracted = 'neo4j-community-1.7.2'
+  $url = 'http://dist.neo4j.org'
+  $filename = 'neo4j-community-1.8.1-unix.tar.gz'
+  $filename_extracted = 'neo4j-community-1.8.1'
 
   user {
     'neo4j':
@@ -36,14 +36,14 @@ class infinite_interns::box::neo4j {
 
   file {
     '/usr/share/neo4j/conf/neo4j-server.properties':
-      source => 'puppet:///modules/infinite-interns/usr/share/neo4j/conf/neo4j-server.properties',
+      source => 'puppet:///modules/infinite_interns/usr/share/neo4j/conf/neo4j-server.properties',
       owner  => root,
       group  => root,
       mode   => '0644';
 
     # ulimit -n 65536 for neo4j
     '/etc/security/limits.conf':
-      source => 'puppet:///modules/infinite-interns/etc/security/limits.conf',
+      source => 'puppet:///modules/infinite_interns/etc/security/limits.conf',
       owner  => root,
       group  => root,
       mode   => '0644';
