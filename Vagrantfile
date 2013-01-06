@@ -40,6 +40,11 @@ Vagrant::Config.run do |config|
     octave.vm.host_name = "octave"
   end
 
+  config.vm.define :sage do |sage|
+    sage.vm.host_name = "sage"
+    sage.vm.forward_port 8080, 8080
+  end
+
   config.vm.define :refine do |refine|
     refine.vm.host_name = "refine"
     refine.vm.forward_port 3333, 3333

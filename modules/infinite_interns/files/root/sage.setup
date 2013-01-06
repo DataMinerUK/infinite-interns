@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Make sure we have Hmisc for typesetting R
+/opt/sage/sage -c "r.install_package('Hmisc')" > /tmp/sage.setup
+
+# Hack to get notebook initial admin password set
+/usr/bin/expect -c "
+  spawn /opt/sage/sage -c \"notebook(automatic_login=False,port=1234)\"
+  expect {
+    \"Enter new password:\"     {
+      send \"password\r\"
+      expect \"Retype new password:\" { send \"password\r\" };
+      expect -re \".*QuietSite starting on 1234\" { send \003 };
+      expect -re \".*Server Shut Down.\"
+    }
+    timeout
+  }
+"
