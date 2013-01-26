@@ -49,7 +49,8 @@ class infinite_interns::box::sage {
 
     'setup-sage':
       cwd     => '/root',
-      command => "/root/sage.setup";
+      command => '/root/sage.setup',
+      creates => '/root/sage.done';
   }
 
   service {

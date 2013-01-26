@@ -33,3 +33,5 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.5|
     timeout
   }
 "
+
+touch /root/sage.done
