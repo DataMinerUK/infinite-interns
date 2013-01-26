@@ -106,6 +106,19 @@ Vagrant::Config.run do |config|
     hadoop.vm.forward_port 50075, 50075
   end
 
+  config.vm.define :hadoop2 do |hadoop2|
+    hadoop2.vm.host_name = "hadoop2"
+    hadoop2.vm.customize [ "modifyvm", :id, "--name", "hadoop2" ]
+    hadoop2.vm.forward_port 8042, 8042
+    hadoop2.vm.forward_port 8088, 8088
+    hadoop2.vm.forward_port 8888, 8888
+    hadoop2.vm.forward_port 11000, 11000
+    hadoop2.vm.forward_port 11001, 11001
+    hadoop2.vm.forward_port 19888, 19888
+    hadoop2.vm.forward_port 50070, 50070
+    hadoop2.vm.forward_port 50075, 50075
+  end
+
   config.vm.define :neo4j do |neo4j|
     neo4j.vm.host_name = "neo4j"
     neo4j.vm.customize [ "modifyvm", :id, "--name", "neo4j" ]
