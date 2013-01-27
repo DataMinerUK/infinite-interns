@@ -3,19 +3,19 @@ class infinite_interns::box::sage {
 
   file {
     '/etc/init.d/sage':
-      source => 'puppet:///infinite_interns/etc/init.d/sage',
+      source => 'puppet:///modules/infinite_interns/etc/init.d/sage',
       owner  => root,
       group  => root,
       mode   => '0744';
 
     '/etc/init/sage.conf':
-      source => 'puppet:///infinite_interns/etc/init/sage.conf',
+      source => 'puppet:///modules/infinite_interns/etc/init/sage.conf',
       owner  => root,
       group  => root,
       mode   => '0644';
 
     '/root/sage.setup':
-      source => 'puppet:///infinite_interns/root/sage.setup',
+      source => 'puppet:///modules/infinite_interns/root/sage.setup',
       owner  => root,
       group  => root,
       mode   => '0744';

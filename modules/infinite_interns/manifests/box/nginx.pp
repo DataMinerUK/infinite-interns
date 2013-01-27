@@ -7,7 +7,7 @@ class infinite_interns::box::nginx {
 
   file {
     '/etc/nginx/sites-available/default':
-      source => 'puppet:///infinite_interns/etc/nginx/sites-available/default',
+      source => 'puppet:///modules/infinite_interns/etc/nginx/sites-available/default',
       owner  => root,
       group  => root,
       mode   => '0644',
