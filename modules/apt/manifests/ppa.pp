@@ -16,17 +16,25 @@ define apt::ppa(
   $filename_without_dots    = regsubst($filename_without_slashes, '\.', '_', G)
   $filename_without_ppa     = regsubst($filename_without_dots, '^ppa:', '', G)
   $sources_list_d_filename  = "${filename_without_ppa}-${release}.list"
-
-  if ! defined(Package['python-software-properties']) {
-    package { 'python-software-properties': }
+  
+  $package = $::lsbdistrelease ? {
+	  /^[1-9]\..*|1[01]\..*|12.04$/ => 'python-software-properties',
+	  default  => 'software-properties-common',
+  }
+  
+  if ! defined(Package[$package]) {
+    package { $package: }
   }
 
   exec { "add-apt-repository-${name}":
-    command => "/usr/bin/add-apt-repository ${name}",
-    creates => "${sources_list_d}/${sources_list_d_filename}",
-    require => [ File[$sources_list_d],
-                 Package['python-software-properties'] ],
-    notify  => Exec['apt_update'],
+    command   => "/usr/bin/add-apt-repository ${name}",
+    creates   => "${sources_list_d}/${sources_list_d_filename}",
+    logoutput => 'on_failure',
+    require   => [
+      File[$sources_list_d],
+      Package["${package}"],
+    ],
+    notify    => Exec['apt_update'],
   }
 
   file { "${sources_list_d}/${sources_list_d_filename}":
@@ -39,4 +47,3 @@ define apt::ppa(
     require => Class['apt::update'],
   }
 }
-
