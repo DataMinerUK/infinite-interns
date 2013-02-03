@@ -45,24 +45,18 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :pandas do |pandas|
-    pandas.vm.box = "python"
-    pandas.vm.box_url = "target/python.box"
     pandas.vm.host_name = "pandas"
     pandas.vm.customize [ "modifyvm", :id, "--name", "pandas" ]
     pandas.vm.forward_port 8888, 8888
   end
 
   config.vm.define :refine do |refine|
-    refine.vm.box = "java"
-    refine.vm.box_url = "target/java.box"
     refine.vm.host_name = "refine"
     refine.vm.customize [ "modifyvm", :id, "--name", "refine" ]
     refine.vm.forward_port 3333, 3333
   end
 
   config.vm.define :pig do |pig|
-    pig.vm.box = "java"
-    pig.vm.box_url = "target/java.box"
     pig.vm.host_name = "pig"
     pig.vm.customize [ "modifyvm", :id, "--name", "pig" ]
   end
@@ -73,15 +67,11 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :bayes do |bayes|
-    bayes.vm.box = "java"
-    bayes.vm.box_url = "target/java.box"
     bayes.vm.host_name = "bayes"
     bayes.vm.customize [ "modifyvm", :id, "--name", "bayes" ]
   end
 
   config.vm.define :sage do |sage|
-    sage.vm.box = "bayes"
-    sage.vm.box_url = "target/bayes.box"
     sage.vm.host_name = "sage"
     sage.vm.customize [ "modifyvm", :id, "--name", "sage" ]
     sage.vm.forward_port 8080, 8080
@@ -109,8 +99,6 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :elasticsearch do |elasticsearch|
-    elasticsearch.vm.box = "java"
-    elasticsearch.vm.box_url = "target/java.box"
     elasticsearch.vm.host_name = "elasticsearch"
     elasticsearch.vm.customize [ "modifyvm", :id, "--name", "elasticsearch" ]
     elasticsearch.vm.forward_port 9200, 9200
@@ -124,8 +112,6 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :neo4j do |neo4j|
-    neo4j.vm.box = "java"
-    neo4j.vm.box_url = "target/java.box"
     neo4j.vm.host_name = "neo4j"
     neo4j.vm.customize [ "modifyvm", :id, "--name", "neo4j" ]
     neo4j.vm.forward_port 7474, 7474
@@ -148,8 +134,6 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :hadoop do |hadoop|
-    hadoop.vm.box = "java"
-    hadoop.vm.box_url = "target/java.box"
     hadoop.vm.host_name = "hadoop"
     hadoop.vm.customize [ "modifyvm", :id, "--name", "hadoop" ]
     hadoop.vm.forward_port 8042, 8042
@@ -184,8 +168,6 @@ Vagrant::Config.run do |config|
 
   config.vm.define :dev do |dev|
     dev.vm.host_name = "dev"
-    dev.vm.box = "ruby"
-    dev.vm.box_url = "target/ruby.box"
     dev.vm.customize [ "modifyvm", :id, "--name", "dev" ]
   end
 end

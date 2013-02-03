@@ -15,22 +15,7 @@ boxes = [
   'dev'
 ]
 
-dependencies = {
-  'pandas' => 'python',
-  'refine' => 'java',
-  'pig' => 'java',
-  'bayes' => 'java',
-  'sage' => 'bayes',
-  'elasticseach' => 'java',
-  'neo4j' => 'java',
-  'hadoop' => 'java',
-  'dev' => 'ruby'
-}
-
 puppetfiles = FileList['modules/**/*']
-
-dependencies = Hash[dependencies.map {|k,v| [k, [target(v), 'target'] + puppetfiles]}]
-dependencies.default = ['target'] + puppetfiles
 
 
 
@@ -51,7 +36,7 @@ end
 boxes.each do |box|
   # Target for testing a box is just the name of the box
   # TODO: Change to run as `rake run <box>`
-  task box => dependencies[box] do
+  task box => (['target'] + puppetfiles) do
     sh "vagrant destroy -f #{box}"
     sh "vagrant box remove #{box} || true"
     sh "vagrant up #{box}"
