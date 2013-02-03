@@ -20,23 +20,26 @@ class infinite_interns::box::rstudio {
     ]: ensure => latest;
   }
 
-  $rstudio = 'rstudio-0.96.331-amd64.deb'
+  $url = 'http://download1.rstudio.org'
+  $filename = 'rstudio-0.97.312-amd64.deb'
 
   exec {
     'download-rstudio':
-      command => "/usr/bin/wget http://download1.rstudio.org/${rstudio}",
+      command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
-      creates => "/root/${rstudio}",
+      creates => "/root/${filename}",
       timeout => 0;
+  }
 
-    'install-rstudio':
-      command => '/usr/bin/dpkg -i rstudio-0.96.331-amd64.deb',
-      cwd     => '/root',
-      creates => '/usr/bin/rstudio',
-      timeout => 0;
+  package {
+    'rstudio':
+      ensure   => installed,
+      provider => dpkg,
+      source   => "/root/${filename}";
   }
 
   Apt::Source['cran'] -> Package['r-base']
 
-  Package[libjpeg62] -> Exec[download-rstudio] -> Exec[install-rstudio]
+  Package['libjpeg62'] -> Package['rstudio']
+  Exec[download-rstudio] -> Package['rstudio']
 }

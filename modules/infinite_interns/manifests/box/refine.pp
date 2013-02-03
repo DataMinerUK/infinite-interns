@@ -1,7 +1,7 @@
 # Refine Infinite Intern
 class infinite_interns::box::refine {
 
-  require common::devel
+  require java
 
   group {
     'refine': ensure => present
@@ -32,6 +32,7 @@ class infinite_interns::box::refine {
 
   $url = 'http://google-refine.googlecode.com/files'
   $filename = 'google-refine-2.5-r2407.tar.gz'
+  $extracted = 'google-refine-2.5'
 
   exec {
     'download-refine':
@@ -43,7 +44,7 @@ class infinite_interns::box::refine {
     'install-refine':
       command => "/bin/tar xzf /root/${filename}",
       cwd     => '/opt',
-      creates => '/opt/google-refine-2.5',
+      creates => '/opt/${extracted}',
       timeout => 0;
   }
 
@@ -60,5 +61,4 @@ class infinite_interns::box::refine {
   File['/etc/init/refine.conf'] -> Service[refine]
 
   Exec[download-refine] -> Exec[install-refine] -> Service[refine]
-
 }

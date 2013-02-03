@@ -10,10 +10,21 @@ class infinite_interns::box::mysql {
     }
   }
 
-  exec {
-    'mysql-relax-connection-permissions':
-      command => '/usr/bin/mysql -u root --password=password -e "grant all privileges on *.* to \'root\'@\'%\' IDENTIFIED BY \'password\';"';
+  file {
+    '/root/mysql.setup':
+      source => 'puppet:///modules/infinite_interns/root/mysql.setup',
+      owner  => root,
+      group  => root,
+      mode   => '0744';
   }
 
-  Class['::mysql::server'] -> Exec[mysql-relax-connection-permissions]
+  exec {
+    'setup-mysql':
+      cwd     => '/root',
+      command => '/root/mysql.setup',
+      creates => '/root/mysql.done';
+  }
+
+  File['/root/mysql.setup'] -> Exec['setup-mysql']
+  Class['::mysql::server'] -> Exec[mysql-setup]
 }

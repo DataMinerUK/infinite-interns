@@ -8,7 +8,6 @@ class infinite_interns::box::python {
       'python-setuptools',
       'python-dateutil',
       'python-bs4'
-    ]: ensure => installed;
+    ]: ensure => latest;
   }
-
 }
