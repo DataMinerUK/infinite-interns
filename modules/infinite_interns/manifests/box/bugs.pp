@@ -1,5 +1,5 @@
 # OpenBUGS/JAGS Infinite Intern
-class infinite_interns::box::bayes {
+class infinite_interns::box::bugs {
 
   require java
 
