@@ -23,7 +23,7 @@ puppetfiles = FileList['modules/**/*']
 # Tasks
 ################################################################################
 
-task :default => boxes.each { |box| target(box) }
+task :default => boxes.map { |box| target(box) }
 
 task :clean do
   sh 'vagrant destroy -f'
