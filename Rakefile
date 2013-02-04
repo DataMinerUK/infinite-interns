@@ -8,7 +8,7 @@ end
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
   'pandas', 'refine', 'pig', 'r',  'bayes', 'sage', 'octave', 'vowpalwabbit',
-  'mysql', 'elasticsearch', 'mongodb', 'neo4j',
+  'mysql', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
   'nginx',
   'hadoop',
   'phantomjs', 'ocr',
@@ -20,7 +20,7 @@ puppetfiles = FileList['modules/**/*']
 
 
 ################################################################################
-# Tasks
+# Build Tasks
 ################################################################################
 
 task :default => boxes.map { |box| target(box) }
@@ -187,6 +187,13 @@ task :test_neo4j => ['neo4j'] do
   # Check neo4j executable
   # Check neo4j socket
   sh 'vagrant destroy -f neo4j'
+end
+
+task :test_postgres => ['postgres'] do
+  # TODO: Add tests
+  # Check postgres executable
+  # Check postgres socket
+  sh 'vagrant destroy -f postgres'
 end
 
 task :test_nginx => ['nginx'] do

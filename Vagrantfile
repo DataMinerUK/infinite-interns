@@ -117,6 +117,12 @@ Vagrant::Config.run do |config|
     neo4j.vm.forward_port 7474, 7474
   end
 
+  config.vm.define :postgres_precise64 do |postgres|
+    postgres.vm.host_name = "postgres"
+    postgres.vm.customize [ "modifyvm", :id, "--name", "postgres" ]
+    postgres.vm.forward_port 5432, 5432
+  end
+
 
   ##############################################################################
   # Webservers
