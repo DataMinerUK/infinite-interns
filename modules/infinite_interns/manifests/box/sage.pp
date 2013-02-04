@@ -21,6 +21,11 @@ class infinite_interns::box::sage {
       owner  => root,
       group  => root,
       mode   => '0744';
+
+    # Fixup for JAGS library path
+    '/usr/lib64':
+      ensure => 'link',
+      target => '/usr/lib';
   }
 
   # Needed for Sage
@@ -74,6 +79,8 @@ class infinite_interns::box::sage {
   }
 
   File['/root/sage.setup'] -> Exec['setup-sage']
+  File['/usr/lib64'] -> Exec['setup-sage']
+  Package['build-essential'] -> Exec['setup-sage']
 
   Package['libfontconfig1'] -> Service[sage]
   Package['texlive'] -> Service[sage]
