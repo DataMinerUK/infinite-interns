@@ -39,6 +39,7 @@ class infinite_interns::box::hadoop {
       'hadoop-conf-pseudo',
       'oozie',
       'hue',
+      'hive',
       'pig',
       'zookeeper-server',
       'giraph',
@@ -105,8 +106,8 @@ class infinite_interns::box::hadoop {
     Service['hue']
 
   Service['hadoop-mapreduce-historyserver'] -> Package['giraph']
-
-  Package['bigtop-utils'] -> Package['pig']
+  Service['hadoop-mapreduce-historyserver'] -> Package['hive']
+  Service['hadoop-mapreduce-historyserver'] -> Package['pig']
 
   Package['bigtop-utils'] ->
     Package['zookeeper-server'] ->
