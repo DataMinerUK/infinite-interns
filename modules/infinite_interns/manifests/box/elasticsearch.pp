@@ -1,13 +1,13 @@
 # ElasticSearch Infinite Intern
 class infinite_interns::box::elasticsearch {
 
-  require common::devel
+  require java
 
-  $url = 'https://github.com/downloads/elasticsearch/elasticsearch'
-  $filename = 'elasticsearch-0.19.11.deb'
+  $url = 'http://download.elasticsearch.org/elasticsearch/elasticsearch'
+  $filename = 'elasticsearch-0.20.4.deb'
 
   exec {
-    'download-elasticsearch-deb':
+    'download-elasticsearch':
       command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
       creates => "/root/${filename}",
@@ -21,19 +21,23 @@ class infinite_interns::box::elasticsearch {
       source   => "/root/${filename}";
   }
 
+  $head = 'mobz/elasticsearch-head'
+  $paramedic = 'mobz/elasticsearch-head'
+  $bigdesk = 'mobz/elasticsearch-head'
+
   exec {
     'install-elasticsearch-head':
-      command => '/usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head',
+      command => "/usr/share/elasticsearch/bin/plugin -install ${head}",
       creates => '/usr/share/elasticsearch/plugins/head',
       notify  => Service[elasticsearch];
 
     'install-elasticsearch-paramedic':
-      command => '/usr/share/elasticsearch/bin/plugin -install karmi/elasticsearch-paramedic',
+      command => "/usr/share/elasticsearch/bin/plugin -install ${paramedic}",
       creates => '/usr/share/elasticsearch/plugins/paramedic',
       notify  => Service[elasticsearch];
 
     'install-elasticsearch-bigdesk':
-      command =>'/usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk',
+      command => "/usr/share/elasticsearch/bin/plugin -install ${bigdesk}",
       creates => '/usr/share/elasticsearch/plugins/bigdesk',
       notify  => Service[elasticsearch];
   }
@@ -44,7 +48,7 @@ class infinite_interns::box::elasticsearch {
       enable => true;
   }
 
-  Exec[download-elasticsearch-deb] ->
+  Exec[download-elasticsearch] ->
     Package[elasticsearch] ->
     Exec[install-elasticsearch-head] ->
     Exec[install-elasticsearch-paramedic] ->

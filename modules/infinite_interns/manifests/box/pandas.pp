@@ -14,7 +14,7 @@ class infinite_interns::box::pandas {
       'python-scikits.statsmodels',
       'python-tz',
       'python-pandas'
-    ]: ensure => installed;
+    ]: ensure => latest;
   }
 
 }

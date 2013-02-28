@@ -1,13 +1,10 @@
-# Dev installation for building Infinite Intern boxes
+# Tools for developing Infinite Interns
 class infinite_interns::box::dev {
 
+  require ruby
+
   package {
-    [
-      git,
-      ruby,
-      irb,
-      rubygems
-    ]: ensure => installed;
+    'git': ensure => latest;
   }
 
   package {
@@ -18,5 +15,4 @@ class infinite_interns::box::dev {
       ensure   => latest,
       provider => 'gem';
   }
-
 }

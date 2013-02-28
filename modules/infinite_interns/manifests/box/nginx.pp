@@ -2,7 +2,7 @@
 class infinite_interns::box::nginx {
 
   package {
-    'nginx': ensure => installed;
+    'nginx': ensure => latest;
   }
 
   file {
@@ -23,5 +23,4 @@ class infinite_interns::box::nginx {
   Package[nginx] ->
     File['/etc/nginx/sites-available/default'] ->
     Service[nginx]
-
 }

@@ -2,6 +2,8 @@
 # Called rstudio because one letter hostnames are a problem in Vagrant
 class infinite_interns::box::rstudio {
 
+  require bugs
+
   apt::source {
     'cran':
       location    => 'http://cran.ma.imperial.ac.uk/bin/linux/ubuntu',
@@ -16,27 +18,58 @@ class infinite_interns::box::rstudio {
     [
       'gnuplot',
       'r-base',
-      'libjpeg62'
+      'libjpeg62',
+      'texlive',
+      'pandoc',
+      'libcairo2-dev',
+      'build-essential'
     ]: ensure => latest;
   }
 
-  $rstudio = 'rstudio-0.96.331-amd64.deb'
+  file {
+    '/root/R.setup':
+      source => 'puppet:///modules/rstudio/root/R.setup',
+      owner  => root,
+      group  => root,
+      mode   => '0744';
+
+    # Fixup for JAGS library path
+    '/usr/lib64':
+      ensure => 'link',
+      target => '/usr/lib';
+  }
+
+  $url = 'http://download1.rstudio.org'
+  $filename = 'rstudio-0.97.314-amd64.deb'
 
   exec {
     'download-rstudio':
-      command => "/usr/bin/wget http://download1.rstudio.org/${rstudio}",
+      command => "/usr/bin/wget ${url}/${filename}",
       cwd     => '/root',
-      creates => "/root/${rstudio}",
+      creates => "/root/${filename}",
       timeout => 0;
 
-    'install-rstudio':
-      command => '/usr/bin/dpkg -i rstudio-0.96.331-amd64.deb',
+    'setup-R':
       cwd     => '/root',
-      creates => '/usr/bin/rstudio',
+      command => '/root/R.setup',
+      creates => '/root/R.done',
       timeout => 0;
   }
 
-  Apt::Source['cran'] -> Package['r-base']
+  package {
+    'rstudio':
+      ensure   => installed,
+      provider => dpkg,
+      source   => "/root/${filename}";
+  }
 
-  Package[libjpeg62] -> Exec[download-rstudio] -> Exec[install-rstudio]
+  Apt::Source['cran'] -> Package['r-base'] -> Exec['setup-R']
+
+  Package['libjpeg62'] -> Package['rstudio']
+  Exec[download-rstudio] -> Package['rstudio']
+
+  File['/root/R.setup'] -> Exec['setup-R']
+  File['/usr/lib64'] -> Exec['setup-R']
+  Package['libcairo2-dev'] -> Exec['setup-R']
+  Package['build-essential'] -> Exec['setup-R']
 }
