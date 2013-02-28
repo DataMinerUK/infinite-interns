@@ -11,10 +11,15 @@ class infinite_interns::box::mongodb {
       include_src => false;
   }
 
-  package { 'mongodb-10gen': ensure => latest; }
+  package {
+    'mongodb-10gen': ensure => latest;
+  }
 
-  service { 'mongodb': ensure => running; }
+  service {
+    'mongodb': ensure => running;
+  }
 
-  Apt::Source['10gen-upstart'] -> Package['mongodb-10gen'] -> Service[mongodb]
-
+  Apt::Source['10gen-upstart'] ->
+    Package['mongodb-10gen'] ->
+    Service[mongodb]
 }

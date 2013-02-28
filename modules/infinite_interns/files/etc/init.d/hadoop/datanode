@@ -1,6 +1,0 @@
-#!/bin/bash
-
-BASEDIR=$(cd `dirname "$0"` && pwd)
-. "${BASEDIR}/common"
-
-service_command $1 "hadoop-datanode" "org.apache.hadoop.hdfs.server.datanode.DataNode"

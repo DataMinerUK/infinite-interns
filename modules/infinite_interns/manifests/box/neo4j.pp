@@ -1,11 +1,11 @@
 # Neo4J Infinite Intern
 class infinite_interns::box::neo4j {
 
-  require common::devel
+  require java
 
   $url = 'http://dist.neo4j.org'
   $filename = 'neo4j-community-1.8.1-unix.tar.gz'
-  $filename_extracted = 'neo4j-community-1.8.1'
+  $extracted = 'neo4j-community-1.8.1'
 
   user {
     'neo4j':
@@ -22,7 +22,7 @@ class infinite_interns::box::neo4j {
 
     'extract-neo4j':
       cwd     => '/usr/share',
-      command => "/bin/tar xzf /root/${filename} && mv ${filename_extracted} neo4j",
+      command => "/bin/tar xzf /root/${filename} && mv ${extracted} neo4j",
       creates => '/usr/share/neo4j';
 
     'install-neo4j':
@@ -56,5 +56,4 @@ class infinite_interns::box::neo4j {
     Exec['install-neo4j'] ->
     File['/usr/share/neo4j/conf/neo4j-server.properties'] ->
     Exec['start-neo4j']
-
 }

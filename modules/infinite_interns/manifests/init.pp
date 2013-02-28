@@ -1,5 +1,19 @@
-# Coordinate an Infinite Intern installation
+# Coordinate Infinite Intern installations
 class infinite_interns {
-  require common::init
+  require base
+
   include "box::${::hostname}"
+}
+
+class infinite_interns::base {
+  require apt::update
+
+  package {
+    [
+      'bash-completion',
+      'vim',
+      'curl',
+      'unzip'
+    ]: ensure => latest;
+  }
 }

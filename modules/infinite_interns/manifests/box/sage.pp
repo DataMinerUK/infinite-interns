@@ -1,6 +1,8 @@
 # Sage Math Infinite Intern
 class infinite_interns::box::sage {
 
+  require bugs
+
   file {
     '/etc/init.d/sage':
       source => 'puppet:///modules/infinite_interns/etc/init.d/sage',
@@ -19,10 +21,18 @@ class infinite_interns::box::sage {
       owner  => root,
       group  => root,
       mode   => '0744';
+
+    # Fixup for JAGS library path
+    '/usr/lib64':
+      ensure => 'link',
+      target => '/usr/lib';
   }
 
+  # Needed for Sage
   package {
     [
+      'build-essential',
+      'libcairo2-dev',
       'libfontconfig1',
       'texlive',
       'dvipng',
@@ -31,9 +41,17 @@ class infinite_interns::box::sage {
     ]: ensure => latest;
   }
 
+  # Extra packages
+  package {
+    [
+      'octave',
+      'gnuplot'
+    ]: ensure => latest;
+  }
+
   $url = 'http://www.mirrorservice.org/sites/www.sagemath.org/linux/64bit'
-  $filename = 'sage-5.5-linux-64bit-ubuntu_12.04.1_lts-x86_64-Linux.tar.lzma'
-  $filename_extracted = 'sage-5.5-linux-64bit-ubuntu_12.04.1_lts-x86_64-Linux'
+  $filename = 'sage-5.6-linux-64bit-ubuntu_12.04.1_lts-x86_64-Linux.tar.lzma'
+  $extracted = 'sage-5.6-linux-64bit-ubuntu_12.04.1_lts-x86_64-Linux'
 
   exec {
     'download-sage':
@@ -44,7 +62,7 @@ class infinite_interns::box::sage {
 
     'extract-sage':
       cwd     => '/opt',
-      command => "/bin/tar --lzma -xvf /root/${filename} && mv ${filename_extracted} sage",
+      command => "/bin/tar --lzma -xvf /root/${filename} && mv ${extracted} sage",
       creates => '/opt/sage';
 
     'setup-sage':
@@ -61,6 +79,8 @@ class infinite_interns::box::sage {
   }
 
   File['/root/sage.setup'] -> Exec['setup-sage']
+  File['/usr/lib64'] -> Exec['setup-sage']
+  Package['build-essential'] -> Exec['setup-sage']
 
   Package['libfontconfig1'] -> Service[sage]
   Package['texlive'] -> Service[sage]

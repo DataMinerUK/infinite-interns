@@ -5,6 +5,7 @@ describe 'apt::pin', :type => :define do
   let :default_params do
     {
       :ensure   => 'present',
+      :order    => '',
       :packages => '*',
       :priority => '0',
       :release  => nil
@@ -13,6 +14,11 @@ describe 'apt::pin', :type => :define do
 
   [ {},
     {
+      :packages  => 'apache',
+      :priority  => '1'
+    },
+    {
+      :order     => 50,
       :packages  => 'apache',
       :priority  => '1'
     },
@@ -40,11 +46,11 @@ describe 'apt::pin', :type => :define do
 
       it { should contain_file("#{title}.pref").with({
           'ensure'  => param_hash[:ensure],
-          'path'    => "/etc/apt/preferences.d/#{title}.pref",
+          'path'    => "/etc/apt/preferences.d/#{param_hash[:order] == '' ? "" : "#{param_hash[:order]}-"}#{title}.pref",
           'owner'   => 'root',
           'group'   => 'root',
           'mode'    => '0644',
-          'content' => "# #{title}\nPackage: #{param_hash[:packages]}\nPin: release a=#{param_hash[:release] || title}\nPin-Priority: #{param_hash[:priority]}\n",
+          'content' => "# #{title}\nExplanation: : #{title}\nPackage: #{param_hash[:packages]}\nPin: release a=#{param_hash[:release] || title}\nPin-Priority: #{param_hash[:priority]}\n",
         })
       }
     end
