@@ -33,6 +33,7 @@ class infinite_interns::box::hadoop {
       'hue',
       'hive',
       'pig',
+      'sqoop',
       'zookeeper-server',
       'giraph',
       'heimdal-clients'
