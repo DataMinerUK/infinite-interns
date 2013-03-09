@@ -98,6 +98,12 @@ Vagrant::Config.run do |config|
     mysql.vm.forward_port 3306, 3306
   end
 
+  config.vm.define :infinidb do |infinidb|
+    infinidb.vm.host_name = "infinidb"
+    infinidb.vm.customize [ "modifyvm", :id, "--name", "infinidb", "--memory", "2048" ]
+    infinidb.vm.forward_port 3306, 3306
+  end
+
   config.vm.define :elasticsearch do |elasticsearch|
     elasticsearch.vm.host_name = "elasticsearch"
     elasticsearch.vm.customize [ "modifyvm", :id, "--name", "elasticsearch" ]
