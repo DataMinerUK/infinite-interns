@@ -56,11 +56,6 @@ Vagrant::Config.run do |config|
     refine.vm.forward_port 3333, 3333
   end
 
-  config.vm.define :pig do |pig|
-    pig.vm.host_name = "pig"
-    pig.vm.customize [ "modifyvm", :id, "--name", "pig" ]
-  end
-
   config.vm.define :r do |r|
     r.vm.host_name = "rstudio"
     r.vm.customize [ "modifyvm", :id, "--name", "r" ]

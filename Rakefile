@@ -7,7 +7,7 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'refine', 'pig', 'r',  'bayes', 'sage', 'octave', 'vowpalwabbit',
+  'pandas', 'refine', 'r',  'bayes', 'sage', 'octave', 'vowpalwabbit',
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
   'nginx',
   'hadoop',
