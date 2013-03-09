@@ -28,7 +28,7 @@ class infinite_interns::box::rstudio {
 
   file {
     '/root/R.setup':
-      source => 'puppet:///modules/rstudio/root/R.setup',
+      source => 'puppet:///modules/infinite_interns/root/R.setup',
       owner  => root,
       group  => root,
       mode   => '0744';
