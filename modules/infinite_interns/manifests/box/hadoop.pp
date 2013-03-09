@@ -3,12 +3,11 @@ class infinite_interns::box::hadoop {
 
   require java
 
-  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.4.0'
+  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.5.0'
   $arch = 'ubuntu/precise/x86_64'
 
   apt::source {
     'bigtop':
-      # TODO: bigtop-0.5.0 not present on S3?
       location    => "${repo}/${arch}",
       release     => 'bigtop',
       repos       => 'contrib',
@@ -20,13 +19,6 @@ class infinite_interns::box::hadoop {
   file {
     '/root/hdfs.setup':
       source => 'puppet:///modules/infinite_interns/root/hdfs.setup',
-      owner  => root,
-      group  => root,
-      mode   => '0744';
-
-    # TODO: Remove, fixed in bigtop-0.5.0
-    '/etc/hue/conf/hue.ini':
-      source => 'puppet:///modules/infinite_interns/etc/hue/conf/hue.ini',
       owner  => root,
       group  => root,
       mode   => '0744';
