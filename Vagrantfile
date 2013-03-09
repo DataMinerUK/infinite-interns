@@ -61,9 +61,9 @@ Vagrant::Config.run do |config|
     r.vm.customize [ "modifyvm", :id, "--name", "r" ]
   end
 
-  config.vm.define :bayes do |bayes|
-    bayes.vm.host_name = "bayes"
-    bayes.vm.customize [ "modifyvm", :id, "--name", "bayes" ]
+  config.vm.define :bugs do |bugs|
+    bugs.vm.host_name = "bugs"
+    bugs.vm.customize [ "modifyvm", :id, "--name", "bugs" ]
   end
 
   config.vm.define :sage do |sage|
