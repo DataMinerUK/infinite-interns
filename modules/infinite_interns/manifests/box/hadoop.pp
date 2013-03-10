@@ -26,7 +26,6 @@ class infinite_interns::box::hadoop {
 
   package {
     [
-      'unzip',
       'bigtop-utils',
       'hadoop-conf-pseudo',
       'oozie',
@@ -91,16 +90,15 @@ class infinite_interns::box::hadoop {
     Exec['download-extjs'] ->
     Exec['setup-oozie'] ->
     Service['oozie']
-  Package['unzip'] -> Exec['setup-oozie']
 
   Service['hadoop-mapreduce-historyserver'] ->
     Package['hue'] ->
-    File['/etc/hue/conf/hue.ini'] ->
     Service['hue']
 
   Service['hadoop-mapreduce-historyserver'] -> Package['giraph']
   Service['hadoop-mapreduce-historyserver'] -> Package['hive']
   Service['hadoop-mapreduce-historyserver'] -> Package['pig']
+  Service['hadoop-mapreduce-historyserver'] -> Package['sqoop']
 
   Package['bigtop-utils'] ->
     Package['zookeeper-server'] ->
