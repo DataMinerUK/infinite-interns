@@ -3,12 +3,11 @@ class infinite_interns::box::hadoop {
 
   require java
 
-  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.4.0'
+  $repo = 'http://bigtop.s3.amazonaws.com/releases/0.5.0'
   $arch = 'ubuntu/precise/x86_64'
 
   apt::source {
     'bigtop':
-      # TODO: bigtop-0.5.0 not present on S3?
       location    => "${repo}/${arch}",
       release     => 'bigtop',
       repos       => 'contrib',
@@ -23,24 +22,17 @@ class infinite_interns::box::hadoop {
       owner  => root,
       group  => root,
       mode   => '0744';
-
-    # TODO: Remove, fixed in bigtop-0.5.0
-    '/etc/hue/conf/hue.ini':
-      source => 'puppet:///modules/infinite_interns/etc/hue/conf/hue.ini',
-      owner  => root,
-      group  => root,
-      mode   => '0744';
   }
 
   package {
     [
-      'unzip',
       'bigtop-utils',
       'hadoop-conf-pseudo',
       'oozie',
       'hue',
       'hive',
       'pig',
+      'sqoop',
       'zookeeper-server',
       'giraph',
       'heimdal-clients'
@@ -98,16 +90,15 @@ class infinite_interns::box::hadoop {
     Exec['download-extjs'] ->
     Exec['setup-oozie'] ->
     Service['oozie']
-  Package['unzip'] -> Exec['setup-oozie']
 
   Service['hadoop-mapreduce-historyserver'] ->
     Package['hue'] ->
-    File['/etc/hue/conf/hue.ini'] ->
     Service['hue']
 
   Service['hadoop-mapreduce-historyserver'] -> Package['giraph']
   Service['hadoop-mapreduce-historyserver'] -> Package['hive']
   Service['hadoop-mapreduce-historyserver'] -> Package['pig']
+  Service['hadoop-mapreduce-historyserver'] -> Package['sqoop']
 
   Package['bigtop-utils'] ->
     Package['zookeeper-server'] ->

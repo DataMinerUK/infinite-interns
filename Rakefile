@@ -7,8 +7,8 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'refine', 'pig', 'r',  'bayes', 'sage', 'octave', 'vowpalwabbit',
-  'mysql', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
+  'pandas', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
+  'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
   'nginx',
   'hadoop',
   'phantomjs', 'ocr',
@@ -34,18 +34,11 @@ task :clean do
 end
 
 boxes.each do |box|
-  # Target for testing a box is just the name of the box
-  # TODO: Change to run as `rake run <box>`
-  task box => (['target'] + puppetfiles) do
+  # Target for exporting a box is the destination location in target/
+  file target(box) => (['target'] + puppetfiles) do
     sh "vagrant destroy -f #{box}"
     sh "vagrant box remove #{box} || true"
     sh "vagrant up #{box}"
-  end
-
-  # TODO: Add a `rake stop <box>` task
-
-  # Target for exporting a box is the destination location in target/
-  file target(box) => [box] do
     sh "vagrant package #{box} --output #{target(box)}"
     sh "vagrant destroy -f #{box}"
   end

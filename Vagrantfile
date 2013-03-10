@@ -56,19 +56,14 @@ Vagrant::Config.run do |config|
     refine.vm.forward_port 3333, 3333
   end
 
-  config.vm.define :pig do |pig|
-    pig.vm.host_name = "pig"
-    pig.vm.customize [ "modifyvm", :id, "--name", "pig" ]
-  end
-
   config.vm.define :r do |r|
     r.vm.host_name = "rstudio"
     r.vm.customize [ "modifyvm", :id, "--name", "r" ]
   end
 
-  config.vm.define :bayes do |bayes|
-    bayes.vm.host_name = "bayes"
-    bayes.vm.customize [ "modifyvm", :id, "--name", "bayes" ]
+  config.vm.define :bugs do |bugs|
+    bugs.vm.host_name = "bugs"
+    bugs.vm.customize [ "modifyvm", :id, "--name", "bugs" ]
   end
 
   config.vm.define :sage do |sage|
@@ -98,6 +93,12 @@ Vagrant::Config.run do |config|
     mysql.vm.forward_port 3306, 3306
   end
 
+  config.vm.define :infinidb do |infinidb|
+    infinidb.vm.host_name = "infinidb"
+    infinidb.vm.customize [ "modifyvm", :id, "--name", "infinidb", "--memory", "2048" ]
+    infinidb.vm.forward_port 3306, 3306
+  end
+
   config.vm.define :elasticsearch do |elasticsearch|
     elasticsearch.vm.host_name = "elasticsearch"
     elasticsearch.vm.customize [ "modifyvm", :id, "--name", "elasticsearch" ]
@@ -117,7 +118,7 @@ Vagrant::Config.run do |config|
     neo4j.vm.forward_port 7474, 7474
   end
 
-  config.vm.define :postgres_precise64 do |postgres|
+  config.vm.define :postgres do |postgres|
     postgres.vm.host_name = "postgres"
     postgres.vm.customize [ "modifyvm", :id, "--name", "postgres" ]
     postgres.vm.forward_port 5432, 5432
