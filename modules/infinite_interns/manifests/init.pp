@@ -4,16 +4,3 @@ class infinite_interns {
 
   include "box::${::hostname}"
 }
-
-class infinite_interns::base {
-  require apt::update
-
-  package {
-    [
-      'bash-completion',
-      'vim',
-      'curl',
-      'unzip'
-    ]: ensure => latest;
-  }
-}

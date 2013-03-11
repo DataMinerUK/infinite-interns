@@ -26,5 +26,5 @@ class infinite_interns::box::mysql {
   }
 
   File['/root/mysql.setup'] -> Exec['setup-mysql']
-  Class['::mysql::server'] -> Exec[mysql-setup]
+  Class['::mysql::server'] -> Exec['setup-mysql']
 }
