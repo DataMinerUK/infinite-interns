@@ -37,15 +37,16 @@ class infinite_interns::box::pandas {
   Package['libfreetype6-dev'] -> Package['matplotlib']
   Package['libpng-dev'] -> Package['matplotlib']
 
-  Package['numpy'] ->  Package['scipy']
-  Package['numpy'] ->  Package['matplotlib']
-  Package['numpy'] ->  Package['pandas']
-  Package['numpy'] ->  Package['tables']
+  Package['numpy'] -> Package['scipy']
+  Package['numpy'] -> Package['matplotlib']
+  Package['numpy'] -> Package['pandas']
+  Package['numpy'] -> Package['numexpr']
+  Package['numpy'] -> Package['tables']
 
-  Package['scipy'] ->  Package['statsmodels']
-  Package['scipy'] ->  Package['scikit-learn']
+  Package['scipy'] -> Package['statsmodels']
+  Package['scipy'] -> Package['scikit-learn']
 
-  Package['numexpr'] ->  Package['tables']
-  Package['cython'] ->  Package['tables']
-  Package['libhdf5-serial-dev'] ->  Package['tables']
+  Package['numexpr'] -> Package['tables']
+  Package['cython'] -> Package['tables']
+  Package['libhdf5-serial-dev'] -> Package['tables']
 }
