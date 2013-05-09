@@ -5,16 +5,48 @@ class infinite_interns::box::pandas {
 
   package {
     [
-      'python-numpy',
-      'python-scipy',
-      'python-tables',
-      'python-matplotlib',
-      'python-mpltoolkits.basemap',
-      'python-mpltoolkits.basemap-data',
-      'python-scikits.statsmodels',
-      'python-tz',
-      'python-pandas'
+      'build-essential',
+      'gcc',
+      'g++',
+      'gfortran',
+      'libatlas-base-dev',
+      'libfreetype6-dev',
+      'libpng-dev',
+      'libhdf5-serial-dev'
     ]: ensure => latest;
+
+    [
+      'numpy',
+      'scipy',
+      'matplotlib',
+      'pandas',
+      'statsmodels',
+      'scikit-learn',
+      'cython',
+      'numexpr',
+      'tables'
+    ]: ensure   => latest,
+       provider => 'pip';
   }
 
+  Package['libatlas-base-dev'] -> Package['scipy']
+  Package['g++'] -> Package['scipy']
+  Package['gfortran'] -> Package['scipy']
+  Package['build-essential'] -> Package['scipy']
+
+  Package['libfreetype6-dev'] -> Package['matplotlib']
+  Package['libpng-dev'] -> Package['matplotlib']
+
+  Package['numpy'] -> Package['scipy']
+  Package['numpy'] -> Package['matplotlib']
+  Package['numpy'] -> Package['pandas']
+  Package['numpy'] -> Package['numexpr']
+  Package['numpy'] -> Package['tables']
+
+  Package['scipy'] -> Package['statsmodels']
+  Package['scipy'] -> Package['scikit-learn']
+
+  Package['numexpr'] -> Package['tables']
+  Package['cython'] -> Package['tables']
+  Package['libhdf5-serial-dev'] -> Package['tables']
 }
