@@ -9,7 +9,8 @@ class infinite_interns::box::python {
       'python-dateutil',
       'requests',
       'messytables',
-      'beautifulsoup4'
+      'beautifulsoup4',
+      'kales'
     ]: ensure   => latest,
        provider => 'pip';
   }
