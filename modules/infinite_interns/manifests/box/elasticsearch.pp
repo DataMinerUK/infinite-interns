@@ -4,7 +4,7 @@ class infinite_interns::box::elasticsearch {
   require java
 
   $url = 'http://download.elasticsearch.org/elasticsearch/elasticsearch'
-  $filename = 'elasticsearch-0.20.5.deb'
+  $filename = 'elasticsearch-0.90.1.deb'
 
   exec {
     'download-elasticsearch':
@@ -30,8 +30,10 @@ class infinite_interns::box::elasticsearch {
   }
 
   $head = 'mobz/elasticsearch-head'
-  $paramedic = 'mobz/elasticsearch-head'
-  $bigdesk = 'mobz/elasticsearch-head'
+  $paramedic = 'karmi/elasticsearch-paramedic'
+  $bigdesk = 'lukas-vlcek/bigdesk'
+  $segmentspy = 'polyfractal/elasticsearch-segmentspy'
+  $inquisitor = 'polyfractal/elasticsearch-inquisitor'
 
   exec {
     'install-elasticsearch-head':
@@ -45,6 +47,14 @@ class infinite_interns::box::elasticsearch {
     'install-elasticsearch-bigdesk':
       command => "/usr/share/elasticsearch/bin/plugin -install ${bigdesk}",
       creates => '/usr/share/elasticsearch/plugins/bigdesk';
+
+    'install-elasticsearch-segmentspy':
+      command => "/usr/share/elasticsearch/bin/plugin -install ${segmentspy}",
+      creates => '/usr/share/elasticsearch/plugins/segmentspy';
+
+    'install-elasticsearch-inquisitor':
+      command => "/usr/share/elasticsearch/bin/plugin -install ${inquisitor}",
+      creates => '/usr/share/elasticsearch/plugins/inquisitor';
   }
 
   service {
@@ -59,6 +69,8 @@ class infinite_interns::box::elasticsearch {
     Exec[install-elasticsearch-head] ->
     Exec[install-elasticsearch-paramedic] ->
     Exec[install-elasticsearch-bigdesk] ->
+    Exec[install-elasticsearch-segmentspy] ->
+    Exec[install-elasticsearch-inquisitor] ->
     Service[elasticsearch]
 
 }
