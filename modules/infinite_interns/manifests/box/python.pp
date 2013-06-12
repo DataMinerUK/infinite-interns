@@ -12,7 +12,9 @@ class infinite_interns::box::python {
       'messytables',
       'beautifulsoup4',
       'kales',
-      'lxml'
+      'lxml',
+      'scraperwiki_local',
+      'dumptruck'
     ]: ensure   => latest,
        provider => 'pip';
   }
@@ -26,6 +28,8 @@ class infinite_interns::box::python {
 
   Package[libxml2-dev] -> Package[lxml]
   Package[libxslt-dev] -> Package[lxml]
+
+  Package[lxml] -> Package[scraperwiki_local]
 }
 
 class infinite_interns::box::python::base {
