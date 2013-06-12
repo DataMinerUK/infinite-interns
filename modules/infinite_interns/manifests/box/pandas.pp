@@ -2,11 +2,10 @@
 class infinite_interns::box::pandas {
 
   require python
+  require gcc
 
   package {
     [
-      'build-essential',
-      'gcc',
       'g++',
       'gfortran',
       'libatlas-base-dev',
@@ -32,7 +31,6 @@ class infinite_interns::box::pandas {
   Package['libatlas-base-dev'] -> Package['scipy']
   Package['g++'] -> Package['scipy']
   Package['gfortran'] -> Package['scipy']
-  Package['build-essential'] -> Package['scipy']
 
   Package['libfreetype6-dev'] -> Package['matplotlib']
   Package['libpng-dev'] -> Package['matplotlib']

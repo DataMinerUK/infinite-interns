@@ -3,6 +3,7 @@
 class infinite_interns::box::rstudio {
 
   require bugs
+  require gcc
 
   apt::source {
     'cran':
@@ -21,8 +22,7 @@ class infinite_interns::box::rstudio {
       'libjpeg62',
       'texlive',
       'pandoc',
-      'libcairo2-dev',
-      'build-essential'
+      'libcairo2-dev'
     ]: ensure => latest;
   }
 
@@ -71,5 +71,4 @@ class infinite_interns::box::rstudio {
   File['/root/R.setup'] -> Exec['setup-R']
   File['/usr/lib64'] -> Exec['setup-R']
   Package['libcairo2-dev'] -> Exec['setup-R']
-  Package['build-essential'] -> Exec['setup-R']
 }

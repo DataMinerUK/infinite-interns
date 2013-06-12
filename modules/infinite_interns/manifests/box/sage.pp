@@ -2,6 +2,7 @@
 class infinite_interns::box::sage {
 
   require bugs
+  require gcc
 
   file {
     '/etc/init.d/sage':
@@ -31,7 +32,6 @@ class infinite_interns::box::sage {
   # Needed for Sage
   package {
     [
-      'build-essential',
       'libcairo2-dev',
       'libfontconfig1',
       'texlive',
@@ -80,7 +80,6 @@ class infinite_interns::box::sage {
 
   File['/root/sage.setup'] -> Exec['setup-sage']
   File['/usr/lib64'] -> Exec['setup-sage']
-  Package['build-essential'] -> Exec['setup-sage']
 
   Package['libfontconfig1'] -> Service[sage]
   Package['texlive'] -> Service[sage]
