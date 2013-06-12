@@ -2,6 +2,7 @@
 class infinite_interns::box::python {
 
   require python::base
+  require gcc
 
   package {
     [
@@ -10,10 +11,25 @@ class infinite_interns::box::python {
       'requests',
       'messytables',
       'beautifulsoup4',
-      'kales'
+      'kales',
+      'lxml',
+      'scraperwiki_local',
+      'dumptruck'
     ]: ensure   => latest,
        provider => 'pip';
   }
+
+  package {
+    [
+      'libxml2-dev',
+      'libxslt-dev'
+    ]: ensure => latest;
+  }
+
+  Package[libxml2-dev] -> Package[lxml]
+  Package[libxslt-dev] -> Package[lxml]
+
+  Package[lxml] -> Package[scraperwiki_local]
 }
 
 class infinite_interns::box::python::base {
