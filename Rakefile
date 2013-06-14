@@ -7,7 +7,7 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
+  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
   'nginx',
   'hadoop',
@@ -57,7 +57,7 @@ end
 # TODO: Organise dependencies on boxes so no rebuilding
 task :test => [
   :test_python, :test_ruby, :test_java, :test_nodejs,
-  :test_pandas, :test_refine, :test_pig, :test_r,  :test_bayes, :test_sage,
+  :test_pandas, :test_pylucene, :test_refine, :test_pig, :test_r,  :test_bayes, :test_sage,
     :test_octave, :test_vowpalwabbit, :test_vowpalwabbit,
   :test_mysql, :test_elasticsearch, :test_mongodb, :test_neo4j,
   :test_nginx,
@@ -74,6 +74,14 @@ task :test_python => ['python'] do
   # Check extra python libraries installed
   # Check ipython-notebook socket
   sh 'vagrant destroy -f python'
+end
+
+task :test_pylucene => ['pylucene'] do
+  # TODO: Add tests
+  sh 'vagrant ssh pylucene -c "python --version"'
+  # Check extra python libraries installed
+  # Check ipython-notebook socket
+  sh 'vagrant destroy -f pylucene'
 end
 
 task :test_ruby => ['ruby'] do

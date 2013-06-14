@@ -50,6 +50,11 @@ Vagrant::Config.run do |config|
     pandas.vm.forward_port 8888, 8888
   end
 
+  config.vm.define :pylucene do |pylucene|
+    pylucene.vm.host_name = "pylucene"
+    pylucene.vm.customize [ "modifyvm", :id, "--name", "pylucene" ]
+  end
+
   config.vm.define :refine do |refine|
     refine.vm.host_name = "refine"
     refine.vm.customize [ "modifyvm", :id, "--name", "refine" ]
