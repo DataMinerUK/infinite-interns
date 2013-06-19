@@ -40,7 +40,7 @@ class infinite_interns::box::rstudio {
   }
 
   $url = 'http://download1.rstudio.org'
-  $filename = 'rstudio-0.97.314-amd64.deb'
+  $filename = 'rstudio-0.97.551-amd64.deb'
 
   exec {
     'download-rstudio':
