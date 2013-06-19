@@ -23,7 +23,8 @@ class infinite_interns::box::pandas {
       'scikit-learn',
       'cython',
       'numexpr',
-      'tables'
+      'tables',
+      'pandasql'
     ]: ensure   => latest,
        provider => 'pip';
   }
