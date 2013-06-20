@@ -4,6 +4,8 @@ class infinite_interns::box::pandas {
   require python
   require gcc
 
+  include datavis
+
   package {
     [
       'g++',

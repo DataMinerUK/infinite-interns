@@ -11,7 +11,7 @@ boxes = [
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
   'nginx',
   'hadoop',
-  'phantomjs', 'ocr',
+  'phantomjs', 'datavis', 'ocr',
   'dev'
 ]
 
@@ -218,6 +218,12 @@ task :test_phantomjs => ['phantomjs'] do
   # TODO: Add tests
   # Check phantomjs executable
   sh 'vagrant destroy -f phantomjs'
+end
+
+task :test_datavis => ['datavis'] do
+  # TODO: Add tests
+  # Check graphviz executable
+  sh 'vagrant destroy -f datavis'
 end
 
 task :test_ocr => ['ocr'] do

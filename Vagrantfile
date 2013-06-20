@@ -168,6 +168,11 @@ Vagrant::Config.run do |config|
     phantomjs.vm.customize [ "modifyvm", :id, "--name", "phantomjs" ]
   end
 
+  config.vm.define :datavis do |datavis|
+    datavis.vm.host_name = "datavis"
+    datavis.vm.customize [ "modifyvm", :id, "--name", "datavis" ]
+  end
+
   config.vm.define :ocr do |ocr|
     ocr.vm.host_name = "ocr"
     ocr.vm.customize [ "modifyvm", :id, "--name", "ocr" ]
