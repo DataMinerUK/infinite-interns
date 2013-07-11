@@ -7,11 +7,12 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
+  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit', 'datavis', 'saiku',
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgresql',
   'nginx',
+  'tomcat',
   'hadoop',
-  'phantomjs', 'datavis', 'ocr',
+  'phantomjs', 'ocr',
   'dev'
 ]
 
@@ -159,6 +160,18 @@ task :test_vowpalwabbit => ['vowpalwabbit'] do
   sh 'vagrant destroy -f vowpalwabbit'
 end
 
+task :test_datavis => ['datavis'] do
+  # TODO: Add tests
+  # Check graphviz executable
+  sh 'vagrant destroy -f datavis'
+end
+
+task :test_saiku => ['saiku'] do
+  # TODO: Add tests
+  # Check infinidb and tomcat tests
+  sh 'vagrant destroy -f saiku'
+end
+
 task :test_mysql => ['mysql'] do
   # TODO: Add tests
   # Check mysql executable
@@ -205,6 +218,13 @@ task :test_nginx => ['nginx'] do
   sh 'vagrant destroy -f nginx'
 end
 
+task :test_tomcat => ['tomcat'] do
+  # TODO: Add tests
+  # Check tomcat executable
+  # Check tomcat socket
+  sh 'vagrant destroy -f tomcat'
+end
+
 task :test_hadoop => ['hadoop'] do
   # TODO: Include java box tests
   # TODO: Add tests
@@ -218,12 +238,6 @@ task :test_phantomjs => ['phantomjs'] do
   # TODO: Add tests
   # Check phantomjs executable
   sh 'vagrant destroy -f phantomjs'
-end
-
-task :test_datavis => ['datavis'] do
-  # TODO: Add tests
-  # Check graphviz executable
-  sh 'vagrant destroy -f datavis'
 end
 
 task :test_ocr => ['ocr'] do

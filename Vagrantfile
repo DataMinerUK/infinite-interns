@@ -122,6 +122,24 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define :datavis do |datavis|
+    datavis.vm.hostname = "datavis"
+    datavis.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "datavis"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :saiku do |saiku|
+    saiku.vm.hostname = "saiku"
+    saiku.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "saiku"
+      # virtualbox.gui = true
+    end
+    saiku.vm.network :forwarded_port, guest: 3306, host: 3306
+    saiku.vm.network :forwarded_port, guest: 8080, host: 8080
+  end
+
 
   ##############################################################################
   # Databases
@@ -188,12 +206,26 @@ Vagrant.configure("2") do |config|
   ##############################################################################
 
   config.vm.define :nginx do |nginx|
-    nginx.vm.hostname = "postgres"
+    nginx.vm.hostname = "nginx"
     nginx.vm.provider :virtualbox do |virtualbox|
       virtualbox.name = "nginx"
       # virtualbox.gui = true
     end
     nginx.vm.network :forwarded_port, guest: 80, host: 8000
+  end
+
+
+  ##############################################################################
+  # Application Servers
+  ##############################################################################
+
+  config.vm.define :tomcat do |tomcat|
+    tomcat.vm.hostname = "tomcat"
+    tomcat.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "tomcat"
+      # virtualbox.gui = true
+    end
+    tomcat.vm.network :forwarded_port, guest: 8080, host: 8000
   end
 
 
@@ -227,14 +259,6 @@ Vagrant.configure("2") do |config|
     phantomjs.vm.hostname = "phantomjs"
     phantomjs.vm.provider :virtualbox do |virtualbox|
       virtualbox.name = "phantomjs"
-      # virtualbox.gui = true
-    end
-  end
-
-  config.vm.define :datavis do |datavis|
-    datavis.vm.hostname = "datavis"
-    datavis.vm.provider :virtualbox do |virtualbox|
-      virtualbox.name = "datavis"
       # virtualbox.gui = true
     end
   end
