@@ -2,6 +2,9 @@
 class infinite_interns::box::datavis {
 
   package {
-    'graphviz': ensure => latest;
+    [
+      'gnuplot',
+      'graphviz'
+    ]: ensure => latest;
   }
 }

@@ -1,10 +1,9 @@
 # Octave Infinite Intern
 class infinite_interns::box::octave {
 
+  require datavis
+
   package {
-    [
-      'gnuplot',
-      'octave'
-    ]: ensure => latest;
+    'octave': ensure => latest;
   }
 }

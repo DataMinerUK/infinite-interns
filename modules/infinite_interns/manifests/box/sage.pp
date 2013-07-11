@@ -4,6 +4,9 @@ class infinite_interns::box::sage {
   require bugs
   require gcc
 
+  include octave
+  include datavis
+
   file {
     '/etc/init.d/sage':
       source => 'puppet:///modules/infinite_interns/etc/init.d/sage',
@@ -38,14 +41,6 @@ class infinite_interns::box::sage {
       'dvipng',
       'imagemagick',
       'expect'
-    ]: ensure => latest;
-  }
-
-  # Extra packages
-  package {
-    [
-      'octave',
-      'gnuplot'
     ]: ensure => latest;
   }
 

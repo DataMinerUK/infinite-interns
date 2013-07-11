@@ -4,6 +4,8 @@ class infinite_interns::box::r {
   require bugs
   require gcc
 
+  include dataviz
+
   apt::source {
     'cran':
       location    => 'http://cran.ma.imperial.ac.uk/bin/linux/ubuntu',
@@ -16,7 +18,6 @@ class infinite_interns::box::r {
 
   package {
     [
-      'gnuplot',
       'r-base',
       'libjpeg62',
       'texlive',
