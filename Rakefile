@@ -8,7 +8,7 @@ end
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
   'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
-  'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
+  'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgresql',
   'nginx',
   'hadoop',
   'phantomjs', 'datavis', 'ocr',
@@ -190,11 +190,11 @@ task :test_neo4j => ['neo4j'] do
   sh 'vagrant destroy -f neo4j'
 end
 
-task :test_postgres => ['postgres'] do
+task :test_postgresql => ['postgresql'] do
   # TODO: Add tests
-  # Check postgres executable
-  # Check postgres socket
-  sh 'vagrant destroy -f postgres'
+  # Check postgresql executable
+  # Check postgresql socket
+  sh 'vagrant destroy -f postgresql'
 end
 
 task :test_nginx => ['nginx'] do

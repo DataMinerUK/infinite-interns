@@ -173,13 +173,13 @@ Vagrant.configure("2") do |config|
     neo4j.vm.network :forwarded_port, guest: 7474, host: 7474
   end
 
-  config.vm.define :postgres do |postgres|
-    postgres.vm.hostname = "postgres"
-    postgres.vm.provider :virtualbox do |virtualbox|
-      virtualbox.name = "postgres"
+  config.vm.define :postgresql do |postgresql|
+    postgresql.vm.hostname = "postgresql"
+    postgresql.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "postgresql"
       # virtualbox.gui = true
     end
-    postgres.vm.network :forwarded_port, guest: 5432, host: 5432
+    postgresql.vm.network :forwarded_port, guest: 5432, host: 5432
   end
 
 
