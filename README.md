@@ -1,7 +1,9 @@
 Infinite Interns
 ================
-
 Vagrant VM boxes for data driven journalism projects.
+
+This repository contains the Infinite Interns VM development. You may be more
+interested in the sample project [skel] for using Infinite Interns.
 
 
 Preliminaries: VirtualBox and Vagrant
@@ -144,3 +146,4 @@ but briefly:
 
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
 [vagrant]: http://vagrantup.com
+[skel]: https://github.com/DataMinerUK/skel
