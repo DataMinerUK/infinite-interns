@@ -1,5 +1,5 @@
 require 'puppet'
-require 'mocha'
+require 'mocha/api'
 require 'spec_helper'
 RSpec.configure do |config|
   config.mock_with :mocha
@@ -17,7 +17,7 @@ describe provider_class do
     File.stubs(:file?).with("#{root_home}/.my.cnf").returns(true)
   end
 
-  it 'should query privilegess from the database' do
+  it 'should query privileges from the database' do
     provider_class.expects(:mysql) .with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', 'describe user']).returns <<-EOT
 Field	Type	Null	Key	Default	Extra
 Host	char(60)	NO	PRI		
@@ -40,16 +40,16 @@ EOT
     provider_class.db_privs.should == [ 'Select_priv', 'Insert_priv', 'Update_priv' ]
   end
 
-  it 'should query set priviliges' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', 'select * from mysql.user where user="user" and host="host"']).returns <<-EOT
+  it 'should query set privileges' do
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "select * from mysql.user where user='user' and host='host'"]).returns <<-EOT
 Host	User	Password	Select_priv	Insert_priv	Update_priv
 host	user		Y	N	Y
 EOT
     @provider.privileges.should == [ 'Select_priv', 'Update_priv' ]
   end
 
-  it 'should recognize when all priviliges are set' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', 'select * from mysql.user where user="user" and host="host"']).returns <<-EOT
+  it 'should recognize when all privileges are set' do
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "select * from mysql.user where user='user' and host='host'"]).returns <<-EOT
 Host	User	Password	Select_priv	Insert_priv	Update_priv
 host	user		Y	Y	Y
 EOT
@@ -57,7 +57,7 @@ EOT
   end
 
   it 'should recognize when all privileges are not set' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', 'select * from mysql.user where user="user" and host="host"']).returns <<-EOT
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "select * from mysql.user where user='user' and host='host'"]).returns <<-EOT
 Host	User	Password	Select_priv	Insert_priv	Update_priv
 host	user		Y	N	Y
 EOT
@@ -65,30 +65,30 @@ EOT
   end
 
   it 'should be able to set all privileges' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', 'SELECT "1" FROM user WHERE user="user" AND host="host"']).returns "1\n"
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'Y', Update_priv = 'Y' where user=\"user\" and host=\"host\""])
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', "SELECT '1' FROM user WHERE user='user' AND host='host'"]).returns "1\n"
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'Y', Update_priv = 'Y' where user='user' and host='host'"])
     provider_class.expects(:mysqladmin).with(["--defaults-file=#{root_home}/.my.cnf", "flush-privileges"])
     @provider.privileges=(['all'])
   end
 
   it 'should be able to set partial privileges' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', 'SELECT "1" FROM user WHERE user="user" AND host="host"']).returns "1\n"
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'N', Update_priv = 'Y' where user=\"user\" and host=\"host\""])
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', "SELECT '1' FROM user WHERE user='user' AND host='host'"]).returns "1\n"
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'N', Update_priv = 'Y' where user='user' and host='host'"])
     provider_class.expects(:mysqladmin).with(["--defaults-file=#{root_home}/.my.cnf", "flush-privileges"])
     @provider.privileges=(['Select_priv', 'Update_priv'])
   end
 
   it 'should be case insensitive' do
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', 'SELECT "1" FROM user WHERE user="user" AND host="host"']).returns "1\n"
-    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'Y', Update_priv = 'Y' where user=\"user\" and host=\"host\""])
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-NBe', "SELECT '1' FROM user WHERE user='user' AND host='host'"]).returns "1\n"
+    provider_class.expects(:mysql).with(["--defaults-file=#{root_home}/.my.cnf", 'mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'Y', Update_priv = 'Y' where user='user' and host='host'"])
     provider_class.expects(:mysqladmin).with(["--defaults-file=#{root_home}/.my.cnf", 'flush-privileges'])
     @provider.privileges=(['SELECT_PRIV', 'insert_priv', 'UpDaTe_pRiV'])
   end
 
   it 'should not pass --defaults-file if $root_home/.my.cnf is absent' do
     File.stubs(:file?).with("#{root_home}/.my.cnf").returns(false)
-    provider_class.expects(:mysql).with(['mysql', '-NBe', 'SELECT "1" FROM user WHERE user="user" AND host="host"']).returns "1\n"
-    provider_class.expects(:mysql).with(['mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'N', Update_priv = 'Y' where user=\"user\" and host=\"host\""])
+    provider_class.expects(:mysql).with(['mysql', '-NBe', "SELECT '1' FROM user WHERE user='user' AND host='host'"]).returns "1\n"
+    provider_class.expects(:mysql).with(['mysql', '-Be', "update user set Select_priv = 'Y', Insert_priv = 'N', Update_priv = 'Y' where user='user' and host='host'"])
     provider_class.expects(:mysqladmin).with(["flush-privileges"])
     @provider.privileges=(['Select_priv', 'Update_priv'])
   end
