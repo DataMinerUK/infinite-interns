@@ -82,7 +82,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :r do |r|
-    r.vm.hostname = "rstudio"
+    r.vm.hostname = "r"
     r.vm.provider :virtualbox do |virtualbox|
       virtualbox.name = "r"
       # virtualbox.gui = true
