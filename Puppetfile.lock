@@ -6,9 +6,11 @@ FORGE
     puppetlabs/mysql (0.8.1)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/stdlib (4.1.0)
+    willdurand/nodejs (0.0.3)
 
 DEPENDENCIES
   puppetlabs/apt (>= 0)
   puppetlabs/mysql (>= 0)
   puppetlabs/stdlib (>= 0)
+  willdurand/nodejs (>= 0)
 

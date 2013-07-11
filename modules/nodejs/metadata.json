@@ -1,0 +1,29 @@
+{
+  "name": "willdurand-nodejs",
+  "version": "0.0.3",
+  "source": "UNKNOWN",
+  "author": "William Durand",
+  "license": "MIT",
+  "summary": "This module allows to install Node.js and NPM.",
+  "description": "This module allows to install Node.js and NPM.",
+  "project_page": "UNKNOWN",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "8e55fce2ff4cd1331f7c6bc602fe7370",
+    "Modulefile": "2aedbd87e67b72efaea12247a213aae2",
+    "README.md": "5c72a8a2bf928b28e3d232f2736cebab",
+    "Rakefile": "0254db5d3fc38c67a2c160d7296a24f8",
+    "lib/puppet/provider/package/npm.rb": "940f91240e2038636b9cb433f1f663d4",
+    "manifests/init.pp": "d3e7a35de8aa7f628deb1f71b3dd9a39",
+    "manifests/install.pp": "2e2738f5bb7da67abe27aa149a672d3b",
+    "manifests/params.pp": "bfa195060018956182fb9635535e3877",
+    "spec/classes/nodejs_spec.rb": "c8721baa106d34b890e0c948bc943d4a",
+    "spec/defines/nodejs_install_spec.rb": "0e1c474741971e3df77a8e58c35cd91f",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc"
+  }
+}
