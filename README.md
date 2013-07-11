@@ -76,10 +76,50 @@ each Intern without the full building process.
 
 Available Interns
 -----------------
-* `ruby`: A VM for developing Ruby software. Contains `ruby`, `rake`, `irb` and
-  `rubygems` support.
+* `python`: A VM for developing Python software. Contains Python, IPython,
+  IPython Notebook, pip and virtualenv. Includes Python libraries for
+  scraping and parsing like BeautifulSoup, lxml, requests, messytables, kales
+  and scraperwiki.
+* `ruby`: A VM for developing Ruby software. Contains Ruby, Rake, irb and
+  rubygems support.
+* `java`: A VM for developing Java software. Contains OpenJDK 6.
+* `nodejs`: A VM for developing software with Node.js.
 
-* `...`: TODO
+* `pandas`: An extension of the `python` VM with additional specialised Python
+  libraries for data. Includes NumPy, SciPy, Mathplotlib, Pandas, ScikitLearn,
+  tables and PandaSQL.
+* `pylucene`: An extension of the `python` VM with Lucene and the PyLucene
+  wrappers.
+* `refine`: A VM containing Refine.
+* `r`: A VM containing R, RStudio and an installation of R packages useful
+  in data manipulation, regression analysis and graphing. Also includes tex,
+  pandoc and everything in the `dataviz` VM.
+* `bugs`: A VM installation of OpenBugs and JAGS for Bayesian MCMC.
+* `sage`: A VM containing the Sage mathematics environment incorporating R,
+  Octave, GNUPlot and other systems.
+* `octave`: A VM containing Octave and GNUPlot.
+* `vowpalwabbit`: A VM containing the VowpalWabbit online regression tool.
+* `datavis`: A VM containing graphics software like GraphViz and GNUPlot for
+  data visualisation.
+* `saiku`: A VM containing the Saiku OLAP analysis webapp and backing
+  installations of Tomcat, InfiniDB.
+
+* `mysql`: A VM containing a MySQL installation.
+* `infinidb`: A VM containing an InfiniDB columnar MySQL installation.
+* `elasticsearch`: A VM containing an ElasticSearch installation.
+* `mongodb`: A VM containing a MongoDB installation.
+* `neo4j`: A VM containing a Neo4J installation.
+* `postgresql`: A VM containing a PostgreSQL installation.
+
+* `nginx`: A VM with NGINX for webserving.
+
+* `tomcat`: A VM installation of the Tomcat application server.
+
+* `hadoop`: A BigTop based Hadoop 2 VM in pseudo-distributed mode.
+
+* `phantomjs`: A VM containing an installation of phantomjs.
+
+* `ocr`: A VM containing tesseract for optical character recognition.
 
 * `dev`: A VM for Infinite Intern development tasks. Useful if the host machine
   is being difficult. Includes everything from the `ruby` Intern together with
