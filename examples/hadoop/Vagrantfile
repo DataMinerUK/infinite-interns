@@ -1,12 +1,16 @@
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
   config.vm.box = "hadoop"
   config.vm.box_url = "http://dl.dropbox.com/u/29645873/vagrants/hadoop.box"
 
-  # config.vm.boot_mode = :gui
   config.ssh.forward_x11 = true
 
-  config.vm.forward_port 50030, 50030
-  config.vm.forward_port 50060, 50060
-  config.vm.forward_port 50070, 50070
-  config.vm.forward_port 50075, 50075
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.name = "hadoop"
+    # virtualbox.gui = true
+  end
+
+  config.vm.network :forwarded_port, guest: 50030, host: 50030
+  config.vm.network :forwarded_port, guest: 50060, host: 50060
+  config.vm.network :forwarded_port, guest: 50070, host: 50070
+  config.vm.network :forwarded_port, guest: 50075, host: 50075
 end

@@ -28,7 +28,7 @@ task :default => boxes.map { |box| target(box) }
 task :clean do
   sh 'vagrant destroy -f'
   boxes.each do |box|
-    sh "vagrant box remove #{box} || true"
+    sh "vagrant box remove #{box} virtualbox || true"
   end
   sh 'rm -fr target'
 end
@@ -37,7 +37,7 @@ boxes.each do |box|
   # Target for exporting a box is the destination location in target/
   file target(box) => (['target'] + puppetfiles) do
     sh "vagrant destroy -f #{box}"
-    sh "vagrant box remove #{box} || true"
+    sh "vagrant box remove #{box} virtualbox || true"
     sh "vagrant up #{box}"
     sh "vagrant package #{box} --output #{target(box)}"
     sh "vagrant destroy -f #{box}"
