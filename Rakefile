@@ -13,7 +13,7 @@ boxes = [
   'tomcat',
   'hadoop',
   'phantomjs', 'ocr',
-  'dev'
+  'dev', 'boxgrinder'
 ]
 
 puppetfiles = FileList['modules/**/*']
@@ -252,4 +252,10 @@ task :test_dev => ['dev'] do
   sh 'vagrant ssh dev -c "puppet-lint --version"'
   sh 'vagrant ssh dev -c "librarian-puppet version"'
   sh 'vagrant destroy -f dev'
+end
+
+task :test_dev => ['boxgrinder'] do
+  # TODO: Add tests
+  # Check boxgrinder executable
+  sh 'vagrant destroy -f boxgrinder'
 end

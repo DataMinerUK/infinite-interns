@@ -283,4 +283,12 @@ Vagrant.configure("2") do |config|
       # virtualbox.gui = true
     end
   end
+
+  config.vm.define :boxgrinder do |boxgrinder|
+    boxgrinder.vm.hostname = "boxgrinder"
+    boxgrinder.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "boxgrinder"
+      # virtualbox.gui = true
+    end
+  end
 end
