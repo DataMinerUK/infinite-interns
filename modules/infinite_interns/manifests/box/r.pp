@@ -4,7 +4,7 @@ class infinite_interns::box::r {
   require bugs
   require gcc
 
-  include dataviz
+  include datavis
 
   apt::source {
     'cran':
