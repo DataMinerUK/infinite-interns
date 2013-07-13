@@ -45,8 +45,8 @@ class infinite_interns::box::sage {
   }
 
   $url = 'http://www.mirrorservice.org/sites/www.sagemath.org/linux/64bit'
-  $filename = 'sage-5.7-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux.tar.lzma'
-  $extracted = 'sage-5.7-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux'
+  $filename = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux.tar.lzma'
+  $extracted = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux'
 
   exec {
     'download-sage':
@@ -63,7 +63,8 @@ class infinite_interns::box::sage {
     'setup-sage':
       cwd     => '/root',
       command => '/root/sage.setup',
-      creates => '/root/sage.done';
+      creates => '/root/sage.done',
+      timeout => 0;
   }
 
   service {
