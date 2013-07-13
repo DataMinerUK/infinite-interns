@@ -1,16 +1,18 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Build JCC first
 cd /root/pylucene-4.3.0-1/jcc
 sed -i 's/java-7-openjdk-amd64/java-6-openjdk-amd64/g' setup.py
-python setup.py install > /root/pylucene.done
+python setup.py install
 
 # Add Ivy
 cd /root/pylucene-4.3.0-1/lucene-java-4.3.0
-ant ivy-bootstrap >> /root/pylucene.done
+ant ivy-bootstrap
 
 # Now build and install pylucene
 cd /root/pylucene-4.3.0-1/
-make clean >> /root/pylucene.done
-make >> /root/pylucene.done
-make install >> /root/pylucene.done
+make clean
+make
+make install
+
+touch /root/pylucene.done
