@@ -124,6 +124,7 @@ Available Interns
 * `dev`: A VM for Infinite Intern development tasks. Useful if the host machine
   is being difficult. Includes everything from the `ruby` Intern together with
   `git`, `librarian-puppet` and `puppet-lint`.
+* `boxgrinder`: A VM containing Boxgrinder for building VMs.
 
 
 Vagrant Commmands
