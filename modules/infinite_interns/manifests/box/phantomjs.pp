@@ -6,11 +6,7 @@ class infinite_interns::box::phantomjs {
   $extracted = 'phantomjs-1.9.1-linux-x86_64'
 
   package {
-    [
-      'bzip2',
-      'libfontconfig1'
-#      'libicu48'
-    ]: ensure => latest;
+    'libfontconfig1': ensure => latest;
   }
 
   file {
@@ -36,7 +32,5 @@ class infinite_interns::box::phantomjs {
       timeout => 0;
   }
 
-  Package['bzip2'] -> Exec['install-phantomjs']
   Exec['download-phantomjs'] -> Exec['install-phantomjs']
-
 }

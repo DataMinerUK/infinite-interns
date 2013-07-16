@@ -12,7 +12,7 @@ boxes = [
   'nginx',
   'tomcat',
   'hadoop',
-  'phantomjs', 'ocr',
+  'phantomjs', 'slimerjs', 'ocr',
   'dev', 'boxgrinder'
 ]
 
@@ -59,13 +59,15 @@ end
 # TODO: Organise dependencies on boxes so no rebuilding
 task :test => [
   :test_python, :test_ruby, :test_java, :test_nodejs,
-  :test_pandas, :test_pylucene, :test_refine, :test_pig, :test_r,  :test_bayes, :test_sage,
-    :test_octave, :test_vowpalwabbit, :test_vowpalwabbit,
-  :test_mysql, :test_elasticsearch, :test_mongodb, :test_neo4j,
+  :test_pandas, :test_pylucene, :test_refine, :test_r,  :test_bugs, :test_sage,
+    :test_octave, :test_vowpalwabbit, :test_datavis, :test_saiku,
+  :test_mysql, :test_infinidb, :test_elasticsearch, :test_mongodb, :test_neo4j,
+    :test_postgresql,
   :test_nginx,
+  :test_tomcat,
   :test_hadoop,
-  :test_phantomjs, :test_ocr,
-  :test_dev
+  :test_phantomjs, :test_slimerjs, :test_ocr,
+  :test_dev, :test_boxgrinder
 ]
 
 # TODO: Make tests into: rake test <box>
@@ -76,14 +78,6 @@ task :test_python => ['python'] do
   # Check extra python libraries installed
   # Check ipython-notebook socket
   sh 'vagrant destroy -f python'
-end
-
-task :test_pylucene => ['pylucene'] do
-  # TODO: Add tests
-  sh 'vagrant ssh pylucene -c "python --version"'
-  # Check extra python libraries installed
-  # Check ipython-notebook socket
-  sh 'vagrant destroy -f pylucene'
 end
 
 task :test_ruby => ['ruby'] do
@@ -111,18 +105,19 @@ task :test_pandas => ['pandas'] do
   sh 'vagrant destroy -f pandas'
 end
 
+task :test_pylucene => ['pylucene'] do
+  # TODO: Add tests
+  sh 'vagrant ssh pylucene -c "python --version"'
+  # Check extra python libraries installed
+  # Check ipython-notebook socket
+  sh 'vagrant destroy -f pylucene'
+end
+
 task :test_refine => ['refine'] do
   # TODO: Include java box tests
   # TODO: Add tests
   # Check refine socket
   sh 'vagrant destroy -f refine'
-end
-
-task :test_pig => ['pig'] do
-  # TODO: Include java box tests
-  # TODO: Add tests
-  # Check pig executable
-  sh 'vagrant destroy -f pig'
 end
 
 task :test_r => ['r'] do
@@ -132,12 +127,12 @@ task :test_r => ['r'] do
   sh 'vagrant destroy -f r'
 end
 
-task :test_bayes => ['bayes'] do
+task :test_bugs => ['bugs'] do
   # TODO: Include java box tests
   # TODO: Add tests
   # Check OpenBUGS executable
   # Check JAGS executable
-  sh 'vagrant destroy -f bayes'
+  sh 'vagrant destroy -f bugs'
 end
 
 task :test_sage => ['sage'] do
@@ -239,6 +234,12 @@ task :test_phantomjs => ['phantomjs'] do
   # TODO: Add tests
   # Check phantomjs executable
   sh 'vagrant destroy -f phantomjs'
+end
+
+task :test_slimerjs => ['slimerjs'] do
+  # TODO: Add tests
+  # Check slimerjs executable
+  sh 'vagrant destroy -f slimerjs'
 end
 
 task :test_ocr => ['ocr'] do

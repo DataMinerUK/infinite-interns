@@ -263,6 +263,14 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define :slimerjs do |slimerjs|
+    slimerjs.vm.hostname = "slimerjs"
+    slimerjs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "slimerjs"
+      # virtualbox.gui = true
+    end
+  end
+
   config.vm.define :ocr do |ocr|
     ocr.vm.hostname = "ocr"
     ocr.vm.provider :virtualbox do |virtualbox|

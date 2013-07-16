@@ -117,7 +117,8 @@ Available Interns
 
 * `hadoop`: A BigTop based Hadoop 2 VM in pseudo-distributed mode.
 
-* `phantomjs`: A VM containing an installation of phantomjs.
+* `phantomjs`: A VM containing an installation of PhantomJS.
+* `slimerjs`: A VM containing an installation of SlimerJS.
 
 * `ocr`: A VM containing tesseract for optical character recognition.
 
