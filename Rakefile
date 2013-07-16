@@ -7,15 +7,16 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit',
-  'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgres',
+  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit', 'datavis', 'saiku',
+  'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgresql',
   'nginx',
+  'tomcat',
   'hadoop',
-  'phantomjs', 'datavis', 'ocr',
-  'dev'
+  'phantomjs', 'slimerjs', 'casperjs', 'ocr',
+  'dev', 'boxgrinder'
 ]
 
-puppetfiles = FileList['modules/**/*']
+puppetfiles = FileList['site.pp', 'modules/**/*']
 
 
 
@@ -28,7 +29,7 @@ task :default => boxes.map { |box| target(box) }
 task :clean do
   sh 'vagrant destroy -f'
   boxes.each do |box|
-    sh "vagrant box remove #{box} || true"
+    sh "vagrant box remove #{box} virtualbox || true"
   end
   sh 'rm -fr target'
 end
@@ -37,8 +38,9 @@ boxes.each do |box|
   # Target for exporting a box is the destination location in target/
   file target(box) => (['target'] + puppetfiles) do
     sh "vagrant destroy -f #{box}"
-    sh "vagrant box remove #{box} || true"
+    sh "vagrant box remove #{box} virtualbox || true"
     sh "vagrant up #{box}"
+    sh "rm -f #{target(box)}"
     sh "vagrant package #{box} --output #{target(box)}"
     sh "vagrant destroy -f #{box}"
   end
@@ -57,13 +59,15 @@ end
 # TODO: Organise dependencies on boxes so no rebuilding
 task :test => [
   :test_python, :test_ruby, :test_java, :test_nodejs,
-  :test_pandas, :test_pylucene, :test_refine, :test_pig, :test_r,  :test_bayes, :test_sage,
-    :test_octave, :test_vowpalwabbit, :test_vowpalwabbit,
-  :test_mysql, :test_elasticsearch, :test_mongodb, :test_neo4j,
+  :test_pandas, :test_pylucene, :test_refine, :test_r,  :test_bugs, :test_sage,
+    :test_octave, :test_vowpalwabbit, :test_datavis, :test_saiku,
+  :test_mysql, :test_infinidb, :test_elasticsearch, :test_mongodb, :test_neo4j,
+    :test_postgresql,
   :test_nginx,
+  :test_tomcat,
   :test_hadoop,
-  :test_phantomjs, :test_ocr,
-  :test_dev
+  :test_phantomjs, :test_slimerjs, :test_casperjs, :test_ocr,
+  :test_dev, :test_boxgrinder
 ]
 
 # TODO: Make tests into: rake test <box>
@@ -74,14 +78,6 @@ task :test_python => ['python'] do
   # Check extra python libraries installed
   # Check ipython-notebook socket
   sh 'vagrant destroy -f python'
-end
-
-task :test_pylucene => ['pylucene'] do
-  # TODO: Add tests
-  sh 'vagrant ssh pylucene -c "python --version"'
-  # Check extra python libraries installed
-  # Check ipython-notebook socket
-  sh 'vagrant destroy -f pylucene'
 end
 
 task :test_ruby => ['ruby'] do
@@ -109,18 +105,19 @@ task :test_pandas => ['pandas'] do
   sh 'vagrant destroy -f pandas'
 end
 
+task :test_pylucene => ['pylucene'] do
+  # TODO: Add tests
+  sh 'vagrant ssh pylucene -c "python --version"'
+  # Check extra python libraries installed
+  # Check ipython-notebook socket
+  sh 'vagrant destroy -f pylucene'
+end
+
 task :test_refine => ['refine'] do
   # TODO: Include java box tests
   # TODO: Add tests
   # Check refine socket
   sh 'vagrant destroy -f refine'
-end
-
-task :test_pig => ['pig'] do
-  # TODO: Include java box tests
-  # TODO: Add tests
-  # Check pig executable
-  sh 'vagrant destroy -f pig'
 end
 
 task :test_r => ['r'] do
@@ -130,12 +127,12 @@ task :test_r => ['r'] do
   sh 'vagrant destroy -f r'
 end
 
-task :test_bayes => ['bayes'] do
+task :test_bugs => ['bugs'] do
   # TODO: Include java box tests
   # TODO: Add tests
   # Check OpenBUGS executable
   # Check JAGS executable
-  sh 'vagrant destroy -f bayes'
+  sh 'vagrant destroy -f bugs'
 end
 
 task :test_sage => ['sage'] do
@@ -157,6 +154,18 @@ end
 task :test_vowpalwabbit => ['vowpalwabbit'] do
   sh 'vagrant ssh vowpalwabbit -c "vw --version"'
   sh 'vagrant destroy -f vowpalwabbit'
+end
+
+task :test_datavis => ['datavis'] do
+  # TODO: Add tests
+  # Check graphviz executable
+  sh 'vagrant destroy -f datavis'
+end
+
+task :test_saiku => ['saiku'] do
+  # TODO: Add tests
+  # Check infinidb and tomcat tests
+  sh 'vagrant destroy -f saiku'
 end
 
 task :test_mysql => ['mysql'] do
@@ -190,11 +199,11 @@ task :test_neo4j => ['neo4j'] do
   sh 'vagrant destroy -f neo4j'
 end
 
-task :test_postgres => ['postgres'] do
+task :test_postgresql => ['postgresql'] do
   # TODO: Add tests
-  # Check postgres executable
-  # Check postgres socket
-  sh 'vagrant destroy -f postgres'
+  # Check postgresql executable
+  # Check postgresql socket
+  sh 'vagrant destroy -f postgresql'
 end
 
 task :test_nginx => ['nginx'] do
@@ -203,6 +212,13 @@ task :test_nginx => ['nginx'] do
   # Check nginx socket
   # Check default site
   sh 'vagrant destroy -f nginx'
+end
+
+task :test_tomcat => ['tomcat'] do
+  # TODO: Add tests
+  # Check tomcat executable
+  # Check tomcat socket
+  sh 'vagrant destroy -f tomcat'
 end
 
 task :test_hadoop => ['hadoop'] do
@@ -220,10 +236,18 @@ task :test_phantomjs => ['phantomjs'] do
   sh 'vagrant destroy -f phantomjs'
 end
 
-task :test_datavis => ['datavis'] do
+task :test_slimerjs => ['slimerjs'] do
   # TODO: Add tests
-  # Check graphviz executable
-  sh 'vagrant destroy -f datavis'
+  # Check slimerjs executable
+  sh 'vagrant destroy -f slimerjs'
+end
+
+task :test_casperjs => ['casperjs'] do
+  # TODO: Add tests
+  # Include tests for phantomjs
+  # Include tests for slimerjs
+  # Check casperjs executable
+  sh 'vagrant destroy -f casperjs'
 end
 
 task :test_ocr => ['ocr'] do
@@ -238,4 +262,10 @@ task :test_dev => ['dev'] do
   sh 'vagrant ssh dev -c "puppet-lint --version"'
   sh 'vagrant ssh dev -c "librarian-puppet version"'
   sh 'vagrant destroy -f dev'
+end
+
+task :test_dev => ['boxgrinder'] do
+  # TODO: Add tests
+  # Check boxgrinder executable
+  sh 'vagrant destroy -f boxgrinder'
 end

@@ -1,9 +1,13 @@
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
   config.vm.box = "elasticsearch"
   config.vm.box_url = "http://dl.dropbox.com/u/29645873/vagrants/elasticsearch.box"
 
-  # config.vm.boot_mode = :gui
   config.ssh.forward_x11 = true
 
-  config.vm.forward_port 9200, 9200
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.name = "elasticsearch"
+    # virtualbox.gui = true
+  end
+
+  config.vm.network :forwarded_port, guest: 9200, host: 9200
 end

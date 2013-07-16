@@ -1,5 +1,7 @@
 # Mysql module for Puppet
 
+[![Build Status](https://travis-ci.org/puppetlabs/puppetlabs-mysql.png?branch=master)](https://travis-ci.org/puppetlabs/puppetlabs-mysql)
+
 This module manages mysql on Linux (RedHat/Debian) distros. A native mysql provider implements database resource type to handle database, database user, and database permission.
 
 Pluginsync needs to be enabled for this module to function properly.
@@ -29,7 +31,7 @@ This module uses the fact osfamily which is supported by Facter 1.6.1+. If you d
       }
     }
 
-This module depends on creates_resources function which is introduced in Puppet 2.7. Users on puppet 2.6 can use the following module which provides this functionality:
+This module depends on the `creates_resources` function which is introduced in Puppet 2.7. Users on puppet 2.6 can use the following module which provides this functionality:
 
 [http://github.com/puppetlabs/puppetlabs-create_resources](http://github.com/puppetlabs/puppetlabs-create_resources)
 
@@ -42,6 +44,7 @@ This module is based on work by David Schmitt. The following contributor have co
 * Matthias Pigulla
 * William Van Hevelingen
 * Michael Arnold
+* Chris Weyl
 
 ## Usage
 
@@ -54,6 +57,16 @@ Installs the mysql-client package.
 Installs mysql bindings for java.
 
     class { 'mysql::java': }
+
+### mysql::perl
+Installs mysql bindings for perl
+
+    class { 'mysql::perl': }
+
+### mysql::php
+Installs mysql bindings for php
+
+    class { 'mysql::php': }
 
 ### mysql::python
 Installs mysql bindings for python.
@@ -85,7 +98,7 @@ Creates a database with a user and assign some privileges.
     }
 
 ### mysql::backup
-Installs a mysql backup script, cronjob, and priviledged backup user.
+Installs a mysql backup script, cronjob, and privileged backup user.
 
     class { 'mysql::backup':
       backupuser     => 'myuser',

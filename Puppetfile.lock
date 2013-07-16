@@ -1,14 +1,16 @@
 FORGE
   remote: http://forge.puppetlabs.com
   specs:
-    puppetlabs/apt (1.1.0)
+    puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
-    puppetlabs/mysql (0.6.1)
+    puppetlabs/mysql (0.8.1)
       puppetlabs/stdlib (>= 2.2.1)
-    puppetlabs/stdlib (3.2.0)
+    puppetlabs/stdlib (4.1.0)
+    willdurand/nodejs (0.0.3)
 
 DEPENDENCIES
   puppetlabs/apt (>= 0)
   puppetlabs/mysql (>= 0)
   puppetlabs/stdlib (>= 0)
+  willdurand/nodejs (>= 0)
 

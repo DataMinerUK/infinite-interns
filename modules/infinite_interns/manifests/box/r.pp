@@ -1,9 +1,10 @@
 # R Infinite Intern
-# Called rstudio because one letter hostnames are a problem in Vagrant
-class infinite_interns::box::rstudio {
+class infinite_interns::box::r {
 
   require bugs
   require gcc
+
+  include datavis
 
   apt::source {
     'cran':
@@ -17,7 +18,6 @@ class infinite_interns::box::rstudio {
 
   package {
     [
-      'gnuplot',
       'r-base',
       'libjpeg62',
       'texlive',

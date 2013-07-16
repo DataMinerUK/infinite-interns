@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Install packages
 R --vanilla <<EOF
@@ -41,13 +41,10 @@ install.packages('coda')
 install.packages('boa')
 install.packages('R2OpenBUGS')
 install.packages('rbugs')
-#install.packages('BRugs')
 install.packages('rjags')
 install.packages('R2jags')
 install.packages('runjags')
 install.packages('MCMCpack')
-
 EOF
 
-
-[ $? -eq 0 ] && touch /root/R.done
+touch /root/R.done

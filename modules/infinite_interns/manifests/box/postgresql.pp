@@ -1,5 +1,5 @@
 # PostgreSQL Infinite Intern
-class infinite_interns::box::postgres {
+class infinite_interns::box::postgresql {
 
   package {
     [
