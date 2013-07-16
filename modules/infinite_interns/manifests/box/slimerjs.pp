@@ -34,7 +34,7 @@ class infinite_interns::box::slimerjs {
     'install-slimerjs':
       command => "/bin/tar xjf /root/${filename}",
       cwd     => '/opt',
-      creates => '/opt/${extracted}',
+      creates => "/opt/${extracted}",
       timeout => 0;
   }
 

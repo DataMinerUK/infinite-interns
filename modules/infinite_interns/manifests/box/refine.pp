@@ -53,7 +53,7 @@ class infinite_interns::box::refine {
     'install-refine':
       command => "/bin/tar xzf /root/${filename}",
       cwd     => '/opt',
-      creates => '/opt/${extracted}',
+      creates => "/opt/${extracted}",
       timeout => 0;
   }
 

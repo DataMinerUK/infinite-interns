@@ -17,7 +17,7 @@ class infinite_interns::box::pylucene {
     'install-pylucene':
       command => "/bin/tar xzf /root/${filename}",
       cwd     => '/root',
-      creates => '/root/${extracted}',
+      creates => "/root/${extracted}",
       timeout => 0;
 
     'setup-pylucene':

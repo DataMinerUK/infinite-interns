@@ -28,7 +28,7 @@ class infinite_interns::box::phantomjs {
     'install-phantomjs':
       command => "/bin/tar xjf /root/${filename}",
       cwd     => '/opt',
-      creates => '/opt/${extracted}',
+      creates => "/opt/${extracted}",
       timeout => 0;
   }
 
