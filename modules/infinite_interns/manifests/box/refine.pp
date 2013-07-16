@@ -34,6 +34,15 @@ class infinite_interns::box::refine {
   $filename = 'google-refine-2.5-r2407.tar.gz'
   $extracted = 'google-refine-2.5'
 
+  file {
+    '/etc/profile.d/refine.sh':
+      ensure  => present,
+      content => "export PATH=\$PATH:/opt/${extracted}\n",
+      owner   => root,
+      group   => root,
+      mode    => 0644;
+  }
+
   exec {
     'download-refine':
       command => "/usr/bin/wget ${url}/${filename}",

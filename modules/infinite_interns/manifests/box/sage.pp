@@ -48,6 +48,15 @@ class infinite_interns::box::sage {
   $filename = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux.tar.lzma'
   $extracted = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux'
 
+  file {
+    '/etc/profile.d/sage.sh':
+      ensure  => present,
+      content => "export PATH=\$PATH:/opt/sage\n",
+      owner   => root,
+      group   => root,
+      mode    => 0644;
+  }
+
   exec {
     'download-sage':
       command => "/usr/bin/wget ${url}/${filename}",

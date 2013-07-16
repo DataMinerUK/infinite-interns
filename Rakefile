@@ -40,6 +40,7 @@ boxes.each do |box|
     sh "vagrant destroy -f #{box}"
     sh "vagrant box remove #{box} virtualbox || true"
     sh "vagrant up #{box}"
+    sh "rm -f #{target(box)}"
     sh "vagrant package #{box} --output #{target(box)}"
     sh "vagrant destroy -f #{box}"
   end
