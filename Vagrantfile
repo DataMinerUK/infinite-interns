@@ -271,6 +271,14 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define :casperjs do |casperjs|
+    casperjs.vm.hostname = "casperjs"
+    casperjs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "casperjs"
+      # virtualbox.gui = true
+    end
+  end
+
   config.vm.define :ocr do |ocr|
     ocr.vm.hostname = "ocr"
     ocr.vm.provider :virtualbox do |virtualbox|

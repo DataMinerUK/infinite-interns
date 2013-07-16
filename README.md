@@ -119,6 +119,8 @@ Available Interns
 
 * `phantomjs`: A VM containing an installation of PhantomJS.
 * `slimerjs`: A VM containing an installation of SlimerJS.
+* `casperjs`: A VM containing an installation of CasperJS as well as PhantomJS
+  and SlimerJS.
 
 * `ocr`: A VM containing tesseract for optical character recognition.
 

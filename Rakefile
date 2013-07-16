@@ -12,11 +12,11 @@ boxes = [
   'nginx',
   'tomcat',
   'hadoop',
-  'phantomjs', 'slimerjs', 'ocr',
+  'phantomjs', 'slimerjs', 'casperjs', 'ocr',
   'dev', 'boxgrinder'
 ]
 
-puppetfiles = FileList['modules/**/*']
+puppetfiles = FileList['site.pp', 'modules/**/*']
 
 
 
@@ -66,7 +66,7 @@ task :test => [
   :test_nginx,
   :test_tomcat,
   :test_hadoop,
-  :test_phantomjs, :test_slimerjs, :test_ocr,
+  :test_phantomjs, :test_slimerjs, :test_casperjs, :test_ocr,
   :test_dev, :test_boxgrinder
 ]
 
@@ -240,6 +240,14 @@ task :test_slimerjs => ['slimerjs'] do
   # TODO: Add tests
   # Check slimerjs executable
   sh 'vagrant destroy -f slimerjs'
+end
+
+task :test_casperjs => ['casperjs'] do
+  # TODO: Add tests
+  # Include tests for phantomjs
+  # Include tests for slimerjs
+  # Check casperjs executable
+  sh 'vagrant destroy -f casperjs'
 end
 
 task :test_ocr => ['ocr'] do
