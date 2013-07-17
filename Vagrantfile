@@ -1,9 +1,8 @@
-Vagrant::Config.run do |config|
+Vagrant.configure("2") do |config|
 
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  # config.vm.boot_mode = :gui
   config.ssh.forward_x11 = true
 
   config.vm.provision :puppet, 
@@ -18,25 +17,37 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :python do |python|
-    python.vm.host_name = "python"
-    python.vm.customize [ "modifyvm", :id, "--name", "python" ]
-    python.vm.forward_port 8888, 8888
+    python.vm.hostname = "python"
+    python.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "python"
+      # virtualbox.gui = true
+    end
+    python.vm.network :forwarded_port, guest: 8888, host: 8888
   end
 
   config.vm.define :ruby do |ruby|
-    ruby.vm.host_name = "ruby"
-    ruby.vm.customize [ "modifyvm", :id, "--name", "ruby" ]
+    ruby.vm.hostname = "ruby"
+    ruby.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "ruby"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :java do |java|
-    java.vm.host_name = "java"
-    java.vm.customize [ "modifyvm", :id, "--name", "java" ]
+    java.vm.hostname = "java"
+    java.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "java"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :nodejs do |nodejs|
-    nodejs.vm.host_name = "nodejs"
-    nodejs.vm.customize [ "modifyvm", :id, "--name", "nodejs" ]
-    nodejs.vm.forward_port 8888, 8888 
+    nodejs.vm.hostname = "nodejs"
+    nodejs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "nodejs"
+      # virtualbox.gui = true
+    end
+    nodejs.vm.network :forwarded_port, guest: 8888, host: 8888
   end
 
 
@@ -45,46 +56,88 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :pandas do |pandas|
-    pandas.vm.host_name = "pandas"
-    pandas.vm.customize [ "modifyvm", :id, "--name", "pandas" ]
-    pandas.vm.forward_port 8888, 8888
+    pandas.vm.hostname = "pandas"
+    pandas.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "pandas"
+      # virtualbox.gui = true
+    end
+    pandas.vm.network :forwarded_port, guest: 8888, host: 8888
   end
 
   config.vm.define :pylucene do |pylucene|
-    pylucene.vm.host_name = "pylucene"
-    pylucene.vm.customize [ "modifyvm", :id, "--name", "pylucene" ]
+    pylucene.vm.hostname = "pylucene"
+    pylucene.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "pylucene"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :refine do |refine|
-    refine.vm.host_name = "refine"
-    refine.vm.customize [ "modifyvm", :id, "--name", "refine" ]
-    refine.vm.forward_port 3333, 3333
+    refine.vm.hostname = "refine"
+    refine.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "refine"
+      # virtualbox.gui = true
+    end
+    refine.vm.network :forwarded_port, guest: 3333, host: 3333
   end
 
   config.vm.define :r do |r|
-    r.vm.host_name = "rstudio"
-    r.vm.customize [ "modifyvm", :id, "--name", "r" ]
+    r.vm.hostname = "r"
+    r.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "r"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :bugs do |bugs|
-    bugs.vm.host_name = "bugs"
-    bugs.vm.customize [ "modifyvm", :id, "--name", "bugs" ]
+    bugs.vm.hostname = "bugs"
+    bugs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "bugs"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :sage do |sage|
-    sage.vm.host_name = "sage"
-    sage.vm.customize [ "modifyvm", :id, "--name", "sage" ]
-    sage.vm.forward_port 8080, 8080
+    sage.vm.hostname = "sage"
+    sage.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "sage"
+      # virtualbox.gui = true
+    end
+    sage.vm.network :forwarded_port, guest: 8080, host: 8080
   end
 
   config.vm.define :octave do |octave|
-    octave.vm.host_name = "octave"
-    octave.vm.customize [ "modifyvm", :id, "--name", "octave" ]
+    octave.vm.hostname = "octave"
+    octave.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "octave"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :vowpalwabbit do |vowpalwabbit|
-    vowpalwabbit.vm.host_name = "vowpalwabbit"
-    vowpalwabbit.vm.customize [ "modifyvm", :id, "--name", "vowpalwabbit" ]
+    vowpalwabbit.vm.hostname = "octave"
+    vowpalwabbit.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "vowpalwabbit"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :datavis do |datavis|
+    datavis.vm.hostname = "datavis"
+    datavis.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "datavis"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :saiku do |saiku|
+    saiku.vm.hostname = "saiku"
+    saiku.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "saiku"
+      # virtualbox.gui = true
+    end
+    saiku.vm.network :forwarded_port, guest: 3306, host: 3306
+    saiku.vm.network :forwarded_port, guest: 8080, host: 8080
   end
 
 
@@ -93,40 +146,58 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :mysql do |mysql|
-    mysql.vm.host_name = "mysql"
-    mysql.vm.customize [ "modifyvm", :id, "--name", "mysql" ]
-    mysql.vm.forward_port 3306, 3306
+    mysql.vm.hostname = "mysql"
+    mysql.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "mysql"
+      # virtualbox.gui = true
+    end
+    mysql.vm.network :forwarded_port, guest: 3306, host: 3306
   end
 
   config.vm.define :infinidb do |infinidb|
-    infinidb.vm.host_name = "infinidb"
-    infinidb.vm.customize [ "modifyvm", :id, "--name", "infinidb", "--memory", "2048" ]
-    infinidb.vm.forward_port 3306, 3306
+    infinidb.vm.hostname = "infinidb"
+    infinidb.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "infinidb"
+      # virtualbox.gui = true
+    end
+    infinidb.vm.network :forwarded_port, guest: 3306, host: 3306
   end
 
   config.vm.define :elasticsearch do |elasticsearch|
-    elasticsearch.vm.host_name = "elasticsearch"
-    elasticsearch.vm.customize [ "modifyvm", :id, "--name", "elasticsearch" ]
-    elasticsearch.vm.forward_port 9200, 9200
+    elasticsearch.vm.hostname = "elasticsearch"
+    elasticsearch.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "elasticsearch"
+      # virtualbox.gui = true
+    end
+    elasticsearch.vm.network :forwarded_port, guest: 9200, host: 9200
   end
 
   config.vm.define :mongodb do |mongodb|
-    mongodb.vm.host_name = "mongodb"
-    mongodb.vm.customize [ "modifyvm", :id, "--name", "mongodb" ]
-    mongodb.vm.forward_port 27017, 27017
-    mongodb.vm.forward_port 28017, 28017
+    mongodb.vm.hostname = "mongodb"
+    mongodb.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "mongodb"
+      # virtualbox.gui = true
+    end
+    mongodb.vm.network :forwarded_port, guest: 27017, host: 27017
+    mongodb.vm.network :forwarded_port, guest: 28017, host: 28017
   end
 
   config.vm.define :neo4j do |neo4j|
-    neo4j.vm.host_name = "neo4j"
-    neo4j.vm.customize [ "modifyvm", :id, "--name", "neo4j" ]
-    neo4j.vm.forward_port 7474, 7474
+    neo4j.vm.hostname = "neo4j"
+    neo4j.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "neo4j"
+      # virtualbox.gui = true
+    end
+    neo4j.vm.network :forwarded_port, guest: 7474, host: 7474
   end
 
-  config.vm.define :postgres do |postgres|
-    postgres.vm.host_name = "postgres"
-    postgres.vm.customize [ "modifyvm", :id, "--name", "postgres" ]
-    postgres.vm.forward_port 5432, 5432
+  config.vm.define :postgresql do |postgresql|
+    postgresql.vm.hostname = "postgresql"
+    postgresql.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "postgresql"
+      # virtualbox.gui = true
+    end
+    postgresql.vm.network :forwarded_port, guest: 5432, host: 5432
   end
 
 
@@ -135,9 +206,26 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :nginx do |nginx|
-    nginx.vm.host_name = "nginx"
-    nginx.vm.customize [ "modifyvm", :id, "--name", "nginx" ]
-    nginx.vm.forward_port 80, 8000
+    nginx.vm.hostname = "nginx"
+    nginx.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "nginx"
+      # virtualbox.gui = true
+    end
+    nginx.vm.network :forwarded_port, guest: 80, host: 8000
+  end
+
+
+  ##############################################################################
+  # Application Servers
+  ##############################################################################
+
+  config.vm.define :tomcat do |tomcat|
+    tomcat.vm.hostname = "tomcat"
+    tomcat.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "tomcat"
+      # virtualbox.gui = true
+    end
+    tomcat.vm.network :forwarded_port, guest: 8080, host: 8000
   end
 
 
@@ -146,16 +234,20 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :hadoop do |hadoop|
-    hadoop.vm.host_name = "hadoop"
-    hadoop.vm.customize [ "modifyvm", :id, "--name", "hadoop" ]
-    hadoop.vm.forward_port 8042, 8042
-    hadoop.vm.forward_port 8088, 8088
-    hadoop.vm.forward_port 8888, 8888
-    hadoop.vm.forward_port 11000, 11000
-    hadoop.vm.forward_port 11001, 11001
-    hadoop.vm.forward_port 19888, 19888
-    hadoop.vm.forward_port 50070, 50070
-    hadoop.vm.forward_port 50075, 50075
+    hadoop.vm.hostname = "hadoop"
+    hadoop.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "hadoop"
+      # virtualbox.gui = true
+    end
+    hadoop.vm.network :forwarded_port, guest: 8042, host: 8042
+    hadoop.vm.network :forwarded_port, guest: 8088, host: 8088
+    hadoop.vm.network :forwarded_port, guest: 8088, host: 8088
+    hadoop.vm.network :forwarded_port, guest: 8888, host: 8888
+    hadoop.vm.network :forwarded_port, guest: 11000, host: 11000
+    hadoop.vm.network :forwarded_port, guest: 11001, host: 11001
+    hadoop.vm.network :forwarded_port, guest: 19888, host: 19888
+    hadoop.vm.network :forwarded_port, guest: 50070, host: 50070
+    hadoop.vm.network :forwarded_port, guest: 50075, host: 50075
   end
 
 
@@ -164,18 +256,35 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :phantomjs do |phantomjs|
-    phantomjs.vm.host_name = "phantomjs"
-    phantomjs.vm.customize [ "modifyvm", :id, "--name", "phantomjs" ]
+    phantomjs.vm.hostname = "phantomjs"
+    phantomjs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "phantomjs"
+      # virtualbox.gui = true
+    end
   end
 
-  config.vm.define :datavis do |datavis|
-    datavis.vm.host_name = "datavis"
-    datavis.vm.customize [ "modifyvm", :id, "--name", "datavis" ]
+  config.vm.define :slimerjs do |slimerjs|
+    slimerjs.vm.hostname = "slimerjs"
+    slimerjs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "slimerjs"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :casperjs do |casperjs|
+    casperjs.vm.hostname = "casperjs"
+    casperjs.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "casperjs"
+      # virtualbox.gui = true
+    end
   end
 
   config.vm.define :ocr do |ocr|
-    ocr.vm.host_name = "ocr"
-    ocr.vm.customize [ "modifyvm", :id, "--name", "ocr" ]
+    ocr.vm.hostname = "ocr"
+    ocr.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "ocr"
+      # virtualbox.gui = true
+    end
   end
 
 
@@ -184,7 +293,18 @@ Vagrant::Config.run do |config|
   ##############################################################################
 
   config.vm.define :dev do |dev|
-    dev.vm.host_name = "dev"
-    dev.vm.customize [ "modifyvm", :id, "--name", "dev" ]
+    dev.vm.hostname = "dev"
+    dev.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "dev"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :boxgrinder do |boxgrinder|
+    boxgrinder.vm.hostname = "boxgrinder"
+    boxgrinder.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "boxgrinder"
+      # virtualbox.gui = true
+    end
   end
 end

@@ -29,6 +29,7 @@ class infinite_interns::box::python {
   Package[libxml2-dev] -> Package[lxml]
   Package[libxslt-dev] -> Package[lxml]
 
+  Package[lxml] -> Package[messytables]
   Package[lxml] -> Package[scraperwiki]
 }
 

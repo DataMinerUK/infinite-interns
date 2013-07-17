@@ -4,6 +4,9 @@ class infinite_interns::box::sage {
   require bugs
   require gcc
 
+  include octave
+  include datavis
+
   file {
     '/etc/init.d/sage':
       source => 'puppet:///modules/infinite_interns/etc/init.d/sage',
@@ -41,17 +44,18 @@ class infinite_interns::box::sage {
     ]: ensure => latest;
   }
 
-  # Extra packages
-  package {
-    [
-      'octave',
-      'gnuplot'
-    ]: ensure => latest;
-  }
-
   $url = 'http://www.mirrorservice.org/sites/www.sagemath.org/linux/64bit'
-  $filename = 'sage-5.7-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux.tar.lzma'
-  $extracted = 'sage-5.7-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux'
+  $filename = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux.tar.lzma'
+  $extracted = 'sage-5.10-linux-64bit-ubuntu_12.04.2_lts-x86_64-Linux'
+
+  file {
+    '/etc/profile.d/sage.sh':
+      ensure  => present,
+      content => "export PATH=\$PATH:/opt/sage\n",
+      owner   => root,
+      group   => root,
+      mode    => 0644;
+  }
 
   exec {
     'download-sage':
@@ -68,7 +72,8 @@ class infinite_interns::box::sage {
     'setup-sage':
       cwd     => '/root',
       command => '/root/sage.setup',
-      creates => '/root/sage.done';
+      creates => '/root/sage.done',
+      timeout => 0;
   }
 
   service {

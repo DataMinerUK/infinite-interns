@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 sudo -u hdfs hadoop fs -mkdir -p /user/vagrant
 sudo -u hdfs hadoop fs -chown vagrant:vagrant /user/vagrant

@@ -10,7 +10,8 @@ class infinite_interns::base {
       'bash-completion',
       'vim',
       'curl',
-      'unzip'
+      'unzip',
+      'bzip2'
     ]: ensure => latest;
   }
 

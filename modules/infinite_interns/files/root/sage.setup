@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Start Sage to fixup paths.
 /opt/sage/sage -c "1+1"
 
 # Fix R paths: https://groups.google.com/forum/?fromgroups=#!topic/sage-support/HSHgjD6ujTM
-sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|/opt/sage|g' \
+sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.10|/opt/sage|g' \
   /opt/sage/local/lib/R/bin/R \
   /opt/sage/local/lib/R/bin/libtool \
   /opt/sage/local/lib/R/etc/Makeconf \
@@ -12,20 +12,38 @@ sed -i 's|/home/buildbot/build/sage/snapperkob/snapperkob_binary/build/sage-5.6|
   /opt/sage/local/lib/R/etc/Renviron \
   /opt/sage/local/bin/R
 
-# Make sure we have Hmisc for typesetting R
-/opt/sage/sage -c "r.install_packages('Hmisc')"
-
-# Install some common packages
-/opt/sage/sage -c "r.install_packages('ggplot2')"
-/opt/sage/sage -c "r.install_packages('Cairo')"
+# Data manipulation
 /opt/sage/sage -c "r.install_packages('plyr')"
+/opt/sage/sage -c "r.install_packages('reshape2')"
+/opt/sage/sage -c "r.install_packages('rjson')"
+/opt/sage/sage -c "r.install_packages('lubridate')"
+/opt/sage/sage -c "r.install_packages('Hmisc')"
+/opt/sage/sage -c "r.install_packages('data.table')"
+/opt/sage/sage -c "r.install_packages('sqldf')"
+
+# Graphics packages
+/opt/sage/sage -c "r.install_packages('Cairo')"
+/opt/sage/sage -c "r.install_packages('ggplot2')"
+/opt/sage/sage -c "r.install_packages('scales')"
+/opt/sage/sage -c "r.install_packages('GGally')"
+/opt/sage/sage -c "r.install_packages('gridExtra')"
+
+# Packages for regression analysis
+/opt/sage/sage -c "r.install_packages('biglm')"
+/opt/sage/sage -c "r.install_packages('car')"
+/opt/sage/sage -c "r.install_packages('lmtest')"
+/opt/sage/sage -c "r.install_packages('arm')"
+/opt/sage/sage -c "r.install_packages('gvlma')"
+/opt/sage/sage -c "r.install_packages('penalized')"
 
 # Packages for Bayesian analysis
 /opt/sage/sage -c "r.install_packages('coda')"
 /opt/sage/sage -c "r.install_packages('boa')"
-/opt/sage/sage -c "r.install_packages('rjags')"
-/opt/sage/sage -c "r.install_packages('rbugs')"
 /opt/sage/sage -c "r.install_packages('R2OpenBUGS')"
+/opt/sage/sage -c "r.install_packages('rbugs')"
+/opt/sage/sage -c "r.install_packages('rjags')"
+/opt/sage/sage -c "r.install_packages('R2jags')"
+/opt/sage/sage -c "r.install_packages('runjags')"
 /opt/sage/sage -c "r.install_packages('MCMCpack')"
 
 # Hack to get notebook initial admin password set
