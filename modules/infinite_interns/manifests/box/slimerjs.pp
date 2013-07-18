@@ -11,7 +11,8 @@ class infinite_interns::box::slimerjs {
       'libasound2',
       'libpango1.0-0',
       'libgtk2.0-0',
-      'libxt6'
+      'libxt6',
+      'libcanberra-gtk-module'
     ]: ensure => latest;
   }
 
