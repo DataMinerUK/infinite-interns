@@ -26,7 +26,8 @@ class infinite_interns::box::pandas {
       'cython',
       'numexpr',
       'tables',
-      'pandasql'
+      'pandasql',
+      'pdftables'
     ]: ensure   => latest,
        provider => 'pip';
   }
