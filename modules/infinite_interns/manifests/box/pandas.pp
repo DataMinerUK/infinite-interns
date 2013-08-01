@@ -27,7 +27,8 @@ class infinite_interns::box::pandas {
       'numexpr',
       'tables',
       'pandasql',
-      'pdftables'
+      'pdftables',
+      'distribute'
     ]: ensure   => latest,
        provider => 'pip';
   }
@@ -36,6 +37,7 @@ class infinite_interns::box::pandas {
   Package['g++'] -> Package['scipy']
   Package['gfortran'] -> Package['scipy']
 
+  Package['distribute'] -> Package['matplotlib']
   Package['libfreetype6-dev'] -> Package['matplotlib']
   Package['libpng-dev'] -> Package['matplotlib']
 
