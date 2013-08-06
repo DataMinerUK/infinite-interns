@@ -21,6 +21,7 @@ class infinite_interns::box::pandas {
       'scipy',
       'matplotlib',
       'pandas',
+      'patsy',
       'statsmodels',
       'scikit-learn',
       'cython',
@@ -36,21 +37,21 @@ class infinite_interns::box::pandas {
   Package['libatlas-base-dev'] -> Package['scipy']
   Package['g++'] -> Package['scipy']
   Package['gfortran'] -> Package['scipy']
+  Package['numpy'] -> Package['scipy']
 
   Package['distribute'] -> Package['matplotlib']
   Package['libfreetype6-dev'] -> Package['matplotlib']
   Package['libpng-dev'] -> Package['matplotlib']
-
-  Package['numpy'] -> Package['scipy']
   Package['numpy'] -> Package['matplotlib']
-  Package['numpy'] -> Package['pandas']
-  Package['numpy'] -> Package['numexpr']
-  Package['numpy'] -> Package['tables']
 
+  Package['numpy'] -> Package['pandas']
+
+  Package['patsy'] -> Package['statsmodels']
   Package['scipy'] -> Package['statsmodels']
+
   Package['scipy'] -> Package['scikit-learn']
 
-  Package['numexpr'] -> Package['tables']
+  Package['numpy'] -> Package['numexpr'] -> Package['tables']
   Package['cython'] -> Package['tables']
   Package['libhdf5-serial-dev'] -> Package['tables']
 }
