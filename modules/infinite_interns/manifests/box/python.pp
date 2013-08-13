@@ -14,7 +14,8 @@ class infinite_interns::box::python {
       'kales',
       'lxml',
       'scraperwiki',
-      'dumptruck'
+      'dumptruck',
+      'dataset'
     ]: ensure   => latest,
        provider => 'pip';
   }
