@@ -81,6 +81,15 @@ Vagrant.configure("2") do |config|
     refine.vm.network :forwarded_port, guest: 3333, host: 3333
   end
 
+  config.vm.define :refinebeta do |refinebeta|
+    refinebeta.vm.hostname = "refinebeta"
+    refinebeta.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "refinebeta"
+      # virtualbox.gui = true
+    end
+    refinebeta.vm.network :forwarded_port, guest: 3333, host: 3333
+  end
+
   config.vm.define :r do |r|
     r.vm.hostname = "r"
     r.vm.provider :virtualbox do |virtualbox|
