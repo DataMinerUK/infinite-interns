@@ -1,5 +1,5 @@
 # Refine Infinite Intern
-class infinite_interns::box::refine {
+class infinite_interns::box::refinebeta {
 
   require java
 
@@ -24,15 +24,15 @@ class infinite_interns::box::refine {
       mode   => '0744';
 
     '/etc/init/refine.conf':
-      source => 'puppet:///modules/infinite_interns/etc/init/refine.conf',
+      source => 'puppet:///modules/infinite_interns/etc/init/refinebeta.conf',
       owner  => root,
       group  => root,
       mode   => '0644';
   }
 
-  $url = 'https://github.com/OpenRefine/OpenRefine/releases/download/2.5'
-  $filename = 'google-refine-2.5-r2407.tar.gz'
-  $extracted = 'google-refine-2.5'
+  $url = 'https://github.com/OpenRefine/OpenRefine/releases/download/2.6-beta.1'
+  $filename = 'openrefine-linux-2.6-beta.1.tar.gz'
+  $extracted = 'openrefine-2.6-beta.1'
 
   file {
     '/etc/profile.d/refine.sh':

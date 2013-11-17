@@ -7,7 +7,7 @@ end
 
 boxes = [
   'python', 'ruby', 'java', 'nodejs',
-  'pandas', 'pylucene', 'refine', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit', 'datavis', 'saiku',
+  'pandas', 'pylucene', 'refine', 'refinebeta', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit', 'datavis', 'saiku',
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgresql',
   'nginx',
   'tomcat',
@@ -59,7 +59,7 @@ end
 # TODO: Organise dependencies on boxes so no rebuilding
 task :test => [
   :test_python, :test_ruby, :test_java, :test_nodejs,
-  :test_pandas, :test_pylucene, :test_refine, :test_r,  :test_bugs, :test_sage,
+  :test_pandas, :test_pylucene, :test_refine, :test_refinebeta, :test_r,  :test_bugs, :test_sage,
     :test_octave, :test_vowpalwabbit, :test_datavis, :test_saiku,
   :test_mysql, :test_infinidb, :test_elasticsearch, :test_mongodb, :test_neo4j,
     :test_postgresql,
@@ -118,6 +118,13 @@ task :test_refine => ['refine'] do
   # TODO: Add tests
   # Check refine socket
   sh 'vagrant destroy -f refine'
+end
+
+task :test_refinebeta => ['refinebeta'] do
+  # TODO: Include java box tests
+  # TODO: Add tests
+  # Check refine socket
+  sh 'vagrant destroy -f refinebeta'
 end
 
 task :test_r => ['r'] do
