@@ -16,7 +16,11 @@ class infinite_interns::box::python {
       'scraperwiki',
       'dumptruck',
       'dataset',
-      'nltk'
+      'nltk',
+      'jinja2',
+      'pyzmq',
+      'tornado',
+      'ipython'
     ]: ensure   => latest,
        provider => 'pip';
   }
@@ -27,6 +31,31 @@ class infinite_interns::box::python {
       'libxslt-dev'
     ]: ensure => latest;
   }
+
+  file {
+    '/etc/init.d/ipython-notebook':
+      source => 'puppet:///modules/infinite_interns/etc/init.d/ipython-notebook',
+      owner  => root,
+      group  => root,
+      mode   => '0744';
+
+    '/etc/init/ipython-notebook.conf':
+      source => 'puppet:///modules/infinite_interns/etc/init/ipython-notebook.conf',
+      owner  => root,
+      group  => root,
+      mode   => '0644';
+  }
+
+  service {
+    'ipython-notebook':
+      ensure   => running,
+      enable   => true,
+      provider => 'upstart';
+  }
+
+  Package['jinja2', 'pyzmq', 'tornado'] -> Package['ipython']
+  File['/etc/init.d/ipython-notebook'] -> Service[ipython-notebook]
+  File['/etc/init/ipython-notebook.conf'] -> Service[ipython-notebook]
 
   Package[libxml2-dev] -> Package[lxml]
   Package[libxslt-dev] -> Package[lxml]
@@ -39,9 +68,7 @@ class infinite_interns::box::python::base {
   package {
     [
       'python-pip',
-      'python-dev',
-      'ipython',
-      'ipython-notebook'
+      'python-dev'
     ]: ensure => latest;
   }
 }
