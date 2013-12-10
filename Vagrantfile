@@ -33,6 +33,14 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define :jruby do |jruby|
+    jruby.vm.hostname = "jruby"
+    jruby.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "jruby"
+      # virtualbox.gui = true
+    end
+  end
+
   config.vm.define :java do |java|
     java.vm.hostname = "java"
     java.vm.provider :virtualbox do |virtualbox|
@@ -284,6 +292,14 @@ Vagrant.configure("2") do |config|
     casperjs.vm.hostname = "casperjs"
     casperjs.vm.provider :virtualbox do |virtualbox|
       virtualbox.name = "casperjs"
+      # virtualbox.gui = true
+    end
+  end
+
+  config.vm.define :tabula do |tabula|
+    tabula.vm.hostname = "tabula"
+    tabula.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "tabula"
       # virtualbox.gui = true
     end
   end

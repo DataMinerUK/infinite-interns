@@ -6,13 +6,13 @@ def target(box)
 end
 
 boxes = [
-  'python', 'ruby', 'java', 'nodejs',
+  'python', 'ruby', 'jruby', 'java', 'nodejs',
   'pandas', 'pylucene', 'refine', 'refinebeta', 'r',  'bugs', 'sage', 'octave', 'vowpalwabbit', 'datavis', 'saiku',
   'mysql', 'infinidb', 'elasticsearch', 'mongodb', 'neo4j', 'postgresql',
   'nginx',
   'tomcat',
   'hadoop',
-  'phantomjs', 'slimerjs', 'casperjs', 'ocr',
+  'phantomjs', 'slimerjs', 'casperjs', 'tabula', 'ocr',
   'dev', 'boxgrinder'
 ]
 
@@ -58,7 +58,7 @@ end
 # TODO: Aggregate into single :test target
 # TODO: Organise dependencies on boxes so no rebuilding
 task :test => [
-  :test_python, :test_ruby, :test_java, :test_nodejs,
+  :test_python, :test_ruby, :test_jruby, :test_java, :test_nodejs,
   :test_pandas, :test_pylucene, :test_refine, :test_refinebeta, :test_r,  :test_bugs, :test_sage,
     :test_octave, :test_vowpalwabbit, :test_datavis, :test_saiku,
   :test_mysql, :test_infinidb, :test_elasticsearch, :test_mongodb, :test_neo4j,
@@ -66,7 +66,7 @@ task :test => [
   :test_nginx,
   :test_tomcat,
   :test_hadoop,
-  :test_phantomjs, :test_slimerjs, :test_casperjs, :test_ocr,
+  :test_phantomjs, :test_slimerjs, :test_casperjs, :test_tabula, :test_ocr,
   :test_dev, :test_boxgrinder
 ]
 
@@ -86,6 +86,13 @@ task :test_ruby => ['ruby'] do
   sh 'vagrant ssh ruby -c "irb --version"'
   sh 'vagrant ssh ruby -c "gem --version"'
   sh 'vagrant destroy -f ruby'
+end
+
+task :test_jruby => ['jruby'] do
+  # TODO: Include java box tests
+  sh 'vagrant ssh jruby -c "/usr/local/rvm/bin/rvm version"'
+  sh 'vagrant ssh jruby -c "jruby --version"'
+  sh 'vagrant destroy -f jruby'
 end
 
 task :test_java => ['java'] do
@@ -255,6 +262,12 @@ task :test_casperjs => ['casperjs'] do
   # Include tests for slimerjs
   # Check casperjs executable
   sh 'vagrant destroy -f casperjs'
+end
+
+task :test_tabula => ['tabula'] do
+  # TODO: Add tests
+  # Check tabula executable
+  sh 'vagrant destroy -f tabula'
 end
 
 task :test_ocr => ['ocr'] do
