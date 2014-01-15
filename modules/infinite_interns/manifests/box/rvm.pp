@@ -2,7 +2,7 @@
 class infinite_interns::box::rvm {
 
    exec {
-    'install-rvm':
+     'install-rvm':
        command => '/usr/bin/curl -sSL https://get.rvm.io | sudo bash',
        cwd     => '/root',
        creates => '/usr/local/rvm/bin/rvm',
