@@ -29,7 +29,6 @@ class infinite_interns::box::pandas {
       'tables',
       'pandasql',
       'pdftables',
-      'pdfminer',
       'distribute'
     ]: ensure   => latest,
        provider => 'pip';
