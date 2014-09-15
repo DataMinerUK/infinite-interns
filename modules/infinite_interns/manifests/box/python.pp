@@ -22,7 +22,8 @@ class infinite_interns::box::python {
       'tornado',
       'ipython',
       'pdfminer',
-      'python-documentcloud'
+      'python-documentcloud',
+      'django'
     ]: ensure   => latest,
        provider => 'pip';
   }
