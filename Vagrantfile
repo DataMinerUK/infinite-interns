@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
       virtualbox.name = "python"
       # virtualbox.gui = true
     end
+    python.vm.network :forwarded_port, guest: 8000, host: 8000
     python.vm.network :forwarded_port, guest: 8888, host: 8888
   end
 
