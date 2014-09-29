@@ -23,7 +23,8 @@ class infinite_interns::box::python {
       'ipython',
       'pdfminer',
       'python-documentcloud',
-      'django'
+      'django',
+      'Flask'
     ]: ensure   => latest,
        provider => 'pip';
   }
