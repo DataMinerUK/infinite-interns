@@ -33,7 +33,8 @@ class infinite_interns::box::python {
     [
       'libxml2-dev',
       'libxslt-dev',
-      'qpdf'
+      'qpdf',
+      'sqlite3'
     ]: ensure => latest;
   }
 
