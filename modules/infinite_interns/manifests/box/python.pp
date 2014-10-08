@@ -24,7 +24,8 @@ class infinite_interns::box::python {
       'pdfminer',
       'python-documentcloud',
       'django',
-      'Flask'
+      'Flask',
+      'Flask-SQLAlchemy'
     ]: ensure   => latest,
        provider => 'pip';
   }
